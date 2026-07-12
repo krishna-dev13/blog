@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BlogSphere | Modern Blogging Platform</title>
+    <meta name="description" content="A polished blogging platform experience with modern design and responsive layout." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="navbar">
+      <a href="#home" class="brand">
+        <span class="brand-mark">B</span>
+        <span>BlogSphere</span>
+      </a>
+      <nav class="nav-links">
+        <a href="#home" class="active">Home</a>
+        <a href="#search">Search</a>
+        <a href="#write">Write</a>
+        <a href="#profile">Profile</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="icon-btn" id="themeToggle" aria-label="Toggle dark mode">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+        <a class="btn btn-primary" href="#login">Sign In</a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- HOME PAGE -->
+    <main id="home-view" class="view active">
+      <section class="hero">
+        <div class="hero-content" data-reveal>
+          <p class="eyebrow">Thoughtful stories, curated daily</p>
+          <h1>Publish ideas that inspire, educate, and connect.</h1>
+          <p>
+            Discover expert perspectives, read inspiring content, and share your voice
+            with a global community of curious readers.
+          </p>
+          <div class="hero-actions">
+            <a href="#search" class="btn btn-primary">Start Reading</a>
+            <a href="#blog" class="btn btn-outline">Explore Blogs</a>
+          </div>
+          <div class="hero-stats">
+            <div>
+              <strong>120K+</strong>
+              <span>Readers</span>
+            </div>
+            <div>
+              <strong>3.4K</strong>
+              <span>Articles</span>
+            </div>
+            <div>
+              <strong>98%</strong>
+              <span>Satisfaction</span>
+            </div>
+          </div>
+        </div>
+        <div class="hero-media" data-reveal>
+          <img src="images/hero-bg.svg" alt="Modern blogging illustration" />
+        </div>
+      </section>
+
+      <section class="section" id="trending">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Trending right now</p>
+            <h2>Popular stories readers love</h2>
+          </div>
+          <a href="#search" class="text-link">View all</a>
+        </div>
+        <div class="card-grid">
+          <article class="blog-card" data-reveal>
+            <img src="images/blog-1.svg" alt="AI workflow illustration" />
+            <div class="card-body">
+              <span class="tag">Technology</span>
+              <h3>How AI is reshaping modern product workflows.</h3>
+              <p>Teams are adopting smarter systems and faster feedback loops.</p>
+              <div class="card-meta">
+                <span>By Maya Chen</span>
+                <a href="#blog">Read more</a>
+              </div>
+            </div>
+          </article>
+          <article class="blog-card" data-reveal>
+            <img src="images/blog-2.svg" alt="Remote work illustration" />
+            <div class="card-body">
+              <span class="tag">Lifestyle</span>
+              <h3>Building a calm remote work ritual that actually lasts.</h3>
+              <p>Small habits can create powerful weekly momentum.</p>
+              <div class="card-meta">
+                <span>By Daniel Ross</span>
+                <a href="#blog">Read more</a>
+              </div>
+            </div>
+          </article>
+          <article class="blog-card" data-reveal>
+            <img src="images/blog-3.svg" alt="Travel planning illustration" />
+            <div class="card-body">
+              <span class="tag">Travel</span>
+              <h3>Designing a minimalist travel itinerary for city breaks.</h3>
+              <p>Less clutter, more memorable experiences, and fewer headaches.</p>
+              <div class="card-meta">
+                <span>By Sara Kim</span>
+                <a href="#blog">Read more</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="categories">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Explore topics</p>
+            <h2>Popular categories</h2>
+          </div>
+        </div>
+        <div class="category-grid">
+          <a href="#search" class="category-card" data-reveal>Technology</a>
+          <a href="#search" class="category-card" data-reveal>Programming</a>
+          <a href="#search" class="category-card" data-reveal>AI</a>
+          <a href="#search" class="category-card" data-reveal>Business</a>
+          <a href="#search" class="category-card" data-reveal>Travel</a>
+          <a href="#search" class="category-card" data-reveal>Finance</a>
+          <a href="#search" class="category-card" data-reveal>Lifestyle</a>
+          <a href="#search" class="category-card" data-reveal>Health</a>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Fresh picks</p>
+            <h2>Latest articles</h2>
+          </div>
+        </div>
+        <div class="article-list">
+          <article class="article-row" data-reveal>
+            <div>
+              <span class="tag">Finance</span>
+              <h3>Simple budgeting principles that reduce stress quickly.</h3>
+              <p>Financial clarity is often a result of structure and patience.</p>
+            </div>
+            <a href="#blog" class="text-link">Read</a>
+          </article>
+          <article class="article-row" data-reveal>
+            <div>
+              <span class="tag">Health</span>
+              <h3>How to build a sustainable wellness routine without burnout.</h3>
+              <p>Lean into consistency instead of intensity when you need lasting results.</p>
+            </div>
+            <a href="#blog" class="text-link">Read</a>
+          </article>
+          <article class="article-row" data-reveal>
+            <div>
+              <span class="tag">Programming</span>
+              <h3>Writing cleaner JavaScript with small, composable functions.</h3>
+              <p>Readable code is easier to maintain and easier to share.</p>
+            </div>
+            <a href="#blog" class="text-link">Read</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Featured voices</p>
+            <h2>Meet the authors</h2>
+          </div>
+        </div>
+        <div class="author-grid">
+          <article class="author-card" data-reveal>
+            <img src="images/profile-placeholder.svg" alt="Author portrait" />
+            <h3>Jules Rivera</h3>
+            <p>12.4k followers</p>
+            <button class="btn btn-outline">Follow</button>
+          </article>
+          <article class="author-card" data-reveal>
+            <img src="images/profile-placeholder.svg" alt="Author portrait" />
+            <h3>Amira Patel</h3>
+            <p>9.8k followers</p>
+            <button class="btn btn-outline">Follow</button>
+          </article>
+        </div>
+      </section>
+
+      <section class="newsletter" data-reveal>
+        <h2>Get curated stories in your inbox.</h2>
+        <p>Join our newsletter for weekly highlights and fresh ideas.</p>
+        <form class="newsletter-form" id="newsletterForm">
+          <input type="email" placeholder="Enter your email" required />
+          <button type="submit" class="btn btn-primary">Subscribe</button>
+        </form>
+      </section>
+    </main>
+
+    <!-- LOGIN PAGE -->
+    <main id="login-view" class="view auth-shell">
+      <section class="auth-grid">
+        <div class="auth-hero">
+          <p class="eyebrow">Secure access</p>
+          <h1>Welcome back to your content hub.</h1>
+          <p>
+            Sign in to explore curated stories, publish your own ideas, and stay connected with a thriving writer community.
+          </p>
+          <ul class="benefit-list">
+            <li><i class="fa-solid fa-check"></i> Save favorite articles</li>
+            <li><i class="fa-solid fa-check"></i> Publish thoughts in minutes</li>
+            <li><i class="fa-solid fa-check"></i> Follow inspiring creators</li>
+          </ul>
+        </div>
+
+        <div class="auth-card">
+          <h2>Sign in</h2>
+          <p class="auth-subtitle">Access your account and continue reading.</p>
+          <form class="auth-form" id="loginForm">
+            <label>
+              <span>Email address</span>
+              <div class="input-wrap">
+                <i class="fa-solid fa-envelope"></i>
+                <input type="email" name="email" placeholder="you@example.com" required />
+              </div>
+            </label>
+            <label>
+              <span>Password</span>
+              <div class="input-wrap">
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" name="password" placeholder="Enter your password" required />
+              </div>
+            </label>
+            <div class="row-between">
+              <label class="checkbox-row">
+                <input type="checkbox" />
+                <span>Remember me</span>
+              </label>
+              <a href="#">Forgot password?</a>
+            </div>
+            <button class="btn btn-primary btn-full" type="submit">Login</button>
+          </form>
+          <div class="auth-divider">Or continue with</div>
+          <div class="social-buttons">
+            <button class="btn btn-outline"><i class="fa-brands fa-google"></i> Google</button>
+            <button class="btn btn-outline"><i class="fa-brands fa-github"></i> GitHub</button>
+          </div>
+          <p class="auth-switch">
+            New here?
+            <a href="#register">Create an account</a>
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <!-- REGISTER PAGE -->
+    <main id="register-view" class="view auth-shell">
+      <section class="auth-card" style="margin:0 auto;">
+        <h1>Create your account</h1>
+        <p>Join thousands of storytellers and writers.</p>
+        <form class="auth-form" id="registerForm">
+          <label>
+            Full name
+            <input type="text" name="name" required />
+          </label>
+          <label>
+            Username
+            <input type="text" name="username" required />
+          </label>
+          <label>
+            Email
+            <input type="email" name="email" required />
+          </label>
+          <label>
+            Password
+            <input type="password" name="password" required />
+          </label>
+          <label>
+            Confirm password
+            <input type="password" name="confirmPassword" required />
+          </label>
+          <label>
+            Profile image
+            <input type="file" name="avatar" accept="image/*" />
+          </label>
+          <button class="btn btn-primary btn-full" type="submit">Register</button>
+        </form>
+        <p class="auth-switch">
+          Already have an account?
+          <a href="#login">Sign in</a>
+        </p>
+      </section>
+    </main>
+
+    <!-- BLOG PAGE -->
+    <main id="blog-view" class="view blog-layout">
+      <article class="blog-post-card">
+        <img src="images/blog-1.svg" alt="Featured article illustration" />
+        <div class="blog-content">
+          <span class="tag">Technology</span>
+          <h1>How AI is reshaping modern product workflows</h1>
+          <div class="post-meta">
+            <span>By Maya Chen</span>
+            <span>July 11, 2026</span>
+            <span>6 min read</span>
+          </div>
+          <p>
+            Modern teams are moving faster, but only when tools reduce friction rather than add it.
+            Across product design, operations, and customer support, AI is changing the rhythm of work.
+          </p>
+          <p>
+            The most effective implementations begin with small automation wins: summarizing meetings,
+            drafting content, surfacing insights, and classifying requests. These improvements free people
+            to focus on judgment, empathy, and creativity.
+          </p>
+          <p>
+            The next wave of growth will come from organizations that learn to combine human insight with
+            automation responsibly, with clear guardrails and a strong sense of context.
+          </p>
+          <div class="action-row">
+            <button class="icon-btn" data-like><i class="fa-regular fa-heart"></i> 84</button>
+            <button class="icon-btn" data-bookmark><i class="fa-regular fa-bookmark"></i> Save</button>
+            <button class="icon-btn"><i class="fa-solid fa-share-nodes"></i> Share</button>
+          </div>
+        </div>
+      </article>
+
+      <aside class="sidebar-card">
+        <h2>Comments</h2>
+        <form id="commentForm" class="comment-form">
+          <textarea placeholder="Leave a thoughtful comment..." required></textarea>
+          <button class="btn btn-primary" type="submit">Post comment</button>
+        </form>
+        <div class="comment-list">
+          <div class="comment-item">
+            <strong>Nora</strong>
+            <p>Really enjoyed the practical angle. This feels grounded and useful.</p>
+          </div>
+          <div class="comment-item">
+            <strong>Leo</strong>
+            <p>Love the emphasis on human judgment alongside automation.</p>
+          </div>
+        </div>
+      </aside>
+
+      <section class="section" style="grid-column: 1 / -1;">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Related reads</p>
+            <h2>You might also like</h2>
+          </div>
+        </div>
+        <div class="card-grid">
+          <article class="blog-card">
+            <img src="images/blog-2.svg" alt="Remote work article" />
+            <div class="card-body">
+              <span class="tag">Lifestyle</span>
+              <h3>Building a calm remote work ritual that actually lasts.</h3>
+              <a href="#blog">Read more</a>
+            </div>
+          </article>
+          <article class="blog-card">
+            <img src="images/blog-3.svg" alt="Travel article" />
+            <div class="card-body">
+              <span class="tag">Travel</span>
+              <h3>Designing a minimalist travel itinerary for city breaks.</h3>
+              <a href="#blog">Read more</a>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <!-- PROFILE PAGE -->
+    <main id="profile-view" class="view profile-shell">
+      <section class="profile-card">
+        <img src="images/profile-placeholder.svg" alt="User avatar" />
+        <div>
+          <h1>Amelia Brooks</h1>
+          <p>@ameliawrites • Product storyteller</p>
+          <div class="profile-stats">
+            <div><strong>128</strong><span>Followers</span></div>
+            <div><strong>94</strong><span>Following</span></div>
+            <div><strong>21</strong><span>Blogs</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="profile-tabs">
+        <button class="active">Published</button>
+        <button>Drafts</button>
+        <button>Bookmarks</button>
+        <button>Settings</button>
+      </section>
+
+      <section class="card-grid">
+        <article class="blog-card">
+          <img src="images/blog-1.svg" alt="Blog cover" />
+          <div class="card-body">
+            <h3>Designing content systems that scale.</h3>
+            <p>How strategic structure creates room for creativity.</p>
+          </div>
+        </article>
+        <article class="blog-card">
+          <img src="images/blog-2.svg" alt="Blog cover" />
+          <div class="card-body">
+            <h3>Small rituals that make writing easier.</h3>
+            <p>Habit design can be surprisingly powerful.</p>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <!-- SEARCH PAGE -->
+    <main id="search-view" class="view search-shell">
+      <section class="search-bar-card">
+        <input type="search" id="searchInput" placeholder="Search blogs, authors, or topics" />
+        <button class="btn btn-primary">Search</button>
+      </section>
+
+      <section class="search-results">
+        <div class="filter-row">
+          <button class="btn btn-outline active">Latest</button>
+          <button class="btn btn-outline">Popular</button>
+          <button class="btn btn-outline">Tags</button>
+        </div>
+        <div class="card-grid">
+          <article class="blog-card">
+            <img src="images/blog-1.svg" alt="Blog cover" />
+            <div class="card-body">
+              <span class="tag">AI</span>
+              <h3>Practical ways teams are using AI responsibly.</h3>
+              <p>Guided examples for thoughtful automation.</p>
+            </div>
+          </article>
+          <article class="blog-card">
+            <img src="images/blog-2.svg" alt="Blog cover" />
+            <div class="card-body">
+              <span class="tag">Lifestyle</span>
+              <h3>How to keep routines simple and sustainable.</h3>
+              <p>Consistency beats intensity when the goal is longevity.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <!-- WRITE PAGE -->
+    <main id="write-view" class="view compose-shell">
+      <section class="compose-card">
+        <h1>Write a new story</h1>
+        <form class="compose-form">
+          <label>
+            Blog title
+            <input type="text" placeholder="A compelling headline" required />
+          </label>
+          <label>
+            Thumbnail upload
+            <input type="file" accept="image/*" />
+          </label>
+          <label>
+            Category
+            <select>
+              <option>Technology</option>
+              <option>Programming</option>
+              <option>AI</option>
+              <option>Business</option>
+              <option>Travel</option>
+              <option>Finance</option>
+              <option>Lifestyle</option>
+              <option>Health</option>
+            </select>
+          </label>
+          <label>
+            Tags
+            <input type="text" placeholder="ai, startup, productivity" />
+          </label>
+          <label>
+            Story content
+            <textarea rows="14" placeholder="Start writing your article here..."></textarea>
+          </label>
+          <div class="action-row">
+            <button class="btn btn-outline" type="button">Save draft</button>
+            <button class="btn btn-primary" type="submit">Publish</button>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <!-- SHARED FOOTER -->
+    <footer class="footer">
+      <div>
+        <h3>BlogSphere</h3>
+        <p>Stories, ideas, and practical insight for modern readers.</p>
+      </div>
+      <div>
+        <h4>Quick links</h4>
+        <a href="#home">Home</a>
+        <a href="#search">Search</a>
+        <a href="#write">Write</a>
+      </div>
+      <div>
+        <h4>Follow</h4>
+        <a href="#"><i class="fa-brands fa-x-twitter"></i> Twitter</a>
+        <a href="#"><i class="fa-brands fa-instagram"></i> Instagram</a>
+        <a href="#"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
