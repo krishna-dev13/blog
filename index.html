@@ -1,518 +1,431 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BlogSphere | Modern Blogging Platform</title>
-    <meta name="description" content="A polished blogging platform experience with modern design and responsive layout." />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <header class="navbar">
-      <a href="#home" class="brand">
-        <span class="brand-mark">B</span>
-        <span>BlogSphere</span>
-      </a>
-      <nav class="nav-links">
-        <a href="#home" class="active">Home</a>
-        <a href="#search">Search</a>
-        <a href="#write">Write</a>
-        <a href="#profile">Profile</a>
-      </nav>
-      <div class="nav-actions">
-        <button class="icon-btn" id="themeToggle" aria-label="Toggle dark mode">
-          <i class="fa-solid fa-moon"></i>
-        </button>
-        <a class="btn btn-primary" href="#login">Sign In</a>
-        <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
-          <i class="fa-solid fa-bars"></i>
-        </button>
+<html lang="en" class="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BlogSphere | Elite Publishing & Copyright-Secure Network</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f4f6fa',
+              100: '#e9edf5',
+              200: '#ccd5e6',
+              500: '#4f46e5', /* Indigo Accent */
+              600: '#4338ca',
+              700: '#3730a3',
+              800: '#1e1b4b',
+            },
+            neutral: {
+              950: '#0b0f19' /* Rich dark mode background */
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/auth.css">
+</head>
+<body class="bg-[#f8fafc] text-slate-900 dark:bg-neutral-950 dark:text-slate-100 font-sans antialiased transition-colors duration-200 min-h-screen flex flex-col">
+
+  <script>
+    // If user is not authenticated, send them to the standalone login page.
+    try {
+      if (localStorage.getItem('blog-logged-in') !== 'true') {
+        // preserve if already on login.html to avoid redirect loop
+        if (!window.location.pathname.endsWith('login.html')) {
+          window.location.href = 'login.html';
+        }
+      }
+    } catch (e) { /* ignore */ }
+  </script>
+
+  <!-- Login removed from homepage; use standalone login.html -->
+
+  <header class="sticky top-0 z-40 w-full border-b border-slate-200/80 dark:border-slate-800/80 bg-white/90 dark:bg-neutral-950/90 backdrop-blur-md transition-colors">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      
+      <div class="flex items-center gap-8">
+        <a href="#" class="flex items-center gap-2.5 group">
+          <div class="h-10 w-10 rounded-xl bg-gradient-to-tr from-brand-600 to-violet-500 flex items-center justify-center text-white shadow-md shadow-brand-500/20 group-hover:scale-105 transition-transform">
+            <i class="fa-solid fa-feather-pointed text-lg"></i>
+          </div>
+          <span class="text-xl font-extrabold tracking-tight bg-gradient-to-r from-brand-600 via-indigo-500 to-violet-500 bg-clip-text text-transparent">BlogSphere</span>
+        </a>
+
+        <nav class="hidden lg:flex items-center gap-1">
+          <a href="#" class="px-4 py-2 rounded-lg text-sm font-semibold text-brand-600 dark:text-brand-400 bg-brand-50 dark:bg-brand-950/40">Discover</a>
+          <a href="#" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">Trending</a>
+          <a href="#" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">Categories</a>
+        </nav>
       </div>
-    </header>
 
-    <!-- HOME PAGE -->
-    <main id="home-view" class="view active">
-      <section class="hero">
-        <div class="hero-content" data-reveal>
-          <p class="eyebrow">Thoughtful stories, curated daily</p>
-          <h1>Publish ideas that inspire, educate, and connect.</h1>
-          <p>
-            Discover expert perspectives, read inspiring content, and share your voice
-            with a global community of curious readers.
-          </p>
-          <div class="hero-actions">
-            <a href="#search" class="btn btn-primary">Start Reading</a>
-            <a href="#blog" class="btn btn-outline">Explore Blogs</a>
-          </div>
-          <div class="hero-stats">
-            <div>
-              <strong>120K+</strong>
-              <span>Readers</span>
-            </div>
-            <div>
-              <strong>3.4K</strong>
-              <span>Articles</span>
-            </div>
-            <div>
-              <strong>98%</strong>
-              <span>Satisfaction</span>
-            </div>
-          </div>
+      <div class="hidden md:flex flex-1 max-w-md mx-8">
+        <div class="relative w-full">
+          <span class="absolute inset-y-0 left-3 flex items-center text-slate-400">
+            <i class="fa-solid fa-magnifying-glass text-sm"></i>
+          </span>
+          <input type="text" placeholder="Search topics, author handles, keywords..." class="w-full pl-10 pr-4 py-2 rounded-xl text-sm border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-500/40 focus:border-brand-500 transition-all dark:text-slate-100">
         </div>
-        <div class="hero-media" data-reveal>
-          <img src="images/hero-bg.svg" alt="Modern blogging illustration" />
-        </div>
-      </section>
+      </div>
 
-      <section class="section" id="trending">
-        <div class="section-heading">
-          <div>
-            <p class="eyebrow">Trending right now</p>
-            <h2>Popular stories readers love</h2>
-          </div>
-          <a href="#search" class="text-link">View all</a>
+      <div class="flex items-center gap-4">
+        <button id="dark-mode-toggle" class="p-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-900 text-slate-500 dark:text-slate-400 transition-colors" aria-label="Toggle Theme">
+          <i class="fa-solid fa-moon text-lg dark:hidden"></i>
+          <i class="fa-solid fa-sun text-lg hidden dark:block"></i>
+        </button>
+
+        <div class="relative">
+          <button class="p-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-900 text-slate-500 dark:text-slate-400 transition-colors">
+            <i class="fa-solid fa-bell text-lg"></i>
+            <span class="absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-rose-500 ring-2 ring-white dark:ring-neutral-950"></span>
+          </button>
         </div>
-        <div class="card-grid">
-          <article class="blog-card" data-reveal>
-            <img src="images/blog-1.svg" alt="AI workflow illustration" />
-            <div class="card-body">
-              <span class="tag">Technology</span>
-              <h3>How AI is reshaping modern product workflows.</h3>
-              <p>Teams are adopting smarter systems and faster feedback loops.</p>
-              <div class="card-meta">
-                <span>By Maya Chen</span>
-                <a href="#blog">Read more</a>
+
+        <a href="login.html" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 text-slate-700 dark:text-slate-100 text-sm font-semibold hover:bg-slate-100 dark:hover:bg-slate-900 transition-all">
+          <i class="fa-solid fa-right-to-bracket text-xs"></i> Login
+        </a>
+        <a href="#writeSection" class="hidden sm:inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-sm font-semibold shadow-md shadow-brand-500/10 transition-all hover:shadow-lg">
+          <i class="fa-solid fa-plus text-xs"></i> Write Blog
+        </a>
+
+        <div class="relative flex items-center gap-2 pl-2 border-l border-slate-200 dark:border-slate-800">
+          <button class="flex items-center gap-2 focus:outline-none" aria-label="User Menu">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&h=150&q=80" alt="Avatar" class="h-9 w-9 rounded-full object-cover ring-2 ring-brand-500/10">
+            <i class="fa-solid fa-chevron-down text-xs text-slate-400 hidden sm:inline"></i>
+          </button>
+        </div>
+
+        <button id="logoutBtn" class="hidden sm:flex items-center gap-2 px-4 py-2.5 rounded-xl bg-rose-500 hover:bg-rose-600 text-white text-sm font-semibold">Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8" id="top">
+    <!-- Login section removed from homepage; use standalone login.html -->
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      
+      <section class="lg:col-span-8 space-y-8">
+        
+        <div class="relative bg-gradient-to-tr from-brand-600 to-indigo-800 rounded-3xl p-8 sm:p-10 text-white overflow-hidden shadow-xl shadow-brand-500/10">
+          <div class="relative z-10 max-w-md space-y-4">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md text-xs font-semibold tracking-wider uppercase text-brand-100">
+              <i class="fa-solid fa-shield-halved"></i> Copyright Guaranteed
+            </span>
+            <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight leading-tight">Unleash original perspective.</h1>
+            <p class="text-sm text-brand-100 leading-relaxed">Join a verified workspace with automated asset protection, clear copyright declarations, and responsive reader telemetry.</p>
+            <div class="pt-2 flex gap-3">
+              <a href="#writeSection" class="inline-flex items-center justify-center bg-white text-brand-700 px-5 py-2.5 rounded-xl font-bold text-sm shadow-md hover:bg-slate-50 transition-all">Start Writing</a>
+              <button class="bg-white/10 hover:bg-white/20 text-white px-5 py-2.5 rounded-xl font-semibold text-sm transition-all border border-white/20">How it works</button>
+            </div>
+          </div>
+          <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-violet-400/20 rounded-full blur-3xl"></div>
+          <div class="absolute right-10 top-10 w-40 h-40 bg-indigo-300/10 rounded-full blur-2xl"></div>
+        </div>
+
+        <div class="flex items-center justify-between border-b border-slate-200/80 dark:border-slate-800/80 pb-4">
+          <h2 class="text-xl font-bold tracking-tight">Latest Stories</h2>
+          <div class="flex items-center gap-2">
+            <button class="p-2 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-500 text-xs font-semibold hover:text-slate-900 transition-all flex items-center gap-1.5">
+              <i class="fa-solid fa-arrow-down-wide-short"></i> Sort: Newest
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          
+          <article class="bg-white dark:bg-neutral-900 rounded-2xl border border-slate-200/60 dark:border-slate-800/60 overflow-hidden flex flex-col group hover:shadow-xl hover:shadow-slate-200/30 dark:hover:shadow-none transition-all duration-300">
+            <div class="relative aspect-video bg-slate-100 dark:bg-slate-950 overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=600&q=80" alt="Tech workspace" class="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500">
+              <div class="absolute bottom-2.5 right-2.5 bg-black/70 backdrop-blur-sm text-[9px] text-white/90 font-mono tracking-wider px-2 py-0.5 rounded border border-white/10 uppercase select-none pointer-events-none">
+                © BlogSphere Verification System
+              </div>
+              <span class="absolute top-3 left-3 bg-brand-500 text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">Technology</span>
+            </div>
+
+            <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+              <div class="space-y-2">
+                <div class="flex items-center gap-2 text-xs text-slate-400">
+                  <span>July 15, 2026</span>
+                  <span>•</span>
+                  <span>5 min read</span>
+                </div>
+                <h3 class="text-lg font-bold group-hover:text-brand-600 transition-colors leading-snug cursor-pointer">
+                  Scaling Architecture with Monoliths and Micro-Frontends
+                </h3>
+                <p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-2">
+                  Navigating enterprise structures requires a careful architectural split. Let's look at why teams are running back to unified systems for better efficiency and less overhead.
+                </p>
+              </div>
+
+              <div class="flex items-center justify-between pt-4 border-t border-slate-100 dark:border-slate-800/80">
+                <div class="flex items-center gap-2">
+                  <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=80&h=80&q=80" alt="Author" class="h-7 w-7 rounded-full object-cover">
+                  <span class="text-xs font-semibold text-slate-700 dark:text-slate-300 hover:underline cursor-pointer">David K.</span>
+                </div>
+                <div class="flex items-center gap-3 text-slate-400">
+                  <button class="flex items-center gap-1 text-xs hover:text-rose-500 transition-colors">
+                    <i class="fa-regular fa-heart"></i> <span class="font-medium text-slate-600 dark:text-slate-400">241</span>
+                  </button>
+                  <button class="flex items-center gap-1 text-xs hover:text-brand-500 transition-colors">
+                    <i class="fa-regular fa-bookmark"></i>
+                  </button>
+                </div>
               </div>
             </div>
           </article>
-          <article class="blog-card" data-reveal>
-            <img src="images/blog-2.svg" alt="Remote work illustration" />
-            <div class="card-body">
-              <span class="tag">Lifestyle</span>
-              <h3>Building a calm remote work ritual that actually lasts.</h3>
-              <p>Small habits can create powerful weekly momentum.</p>
-              <div class="card-meta">
-                <span>By Daniel Ross</span>
-                <a href="#blog">Read more</a>
+
+          <article class="bg-white dark:bg-neutral-900 rounded-2xl border border-slate-200/60 dark:border-slate-800/60 overflow-hidden flex flex-col group hover:shadow-xl hover:shadow-slate-200/30 dark:hover:shadow-none transition-all duration-300">
+            <div class="relative aspect-video bg-slate-100 dark:bg-slate-950 overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=600&q=80" alt="Generative Graphics" class="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500">
+              <div class="absolute bottom-2.5 right-2.5 bg-black/70 backdrop-blur-sm text-[9px] text-white/90 font-mono tracking-wider px-2 py-0.5 rounded border border-white/10 uppercase select-none pointer-events-none">
+                © BlogSphere Verification System
+              </div>
+              <span class="absolute top-3 left-3 bg-violet-600 text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">AI & Design</span>
+            </div>
+
+            <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+              <div class="space-y-2">
+                <div class="flex items-center gap-2 text-xs text-slate-400">
+                  <span>July 14, 2026</span>
+                  <span>•</span>
+                  <span>8 min read</span>
+                </div>
+                <h3 class="text-lg font-bold group-hover:text-brand-600 transition-colors leading-snug cursor-pointer">
+                  Responsible Image Generation in Content Management Platforms
+                </h3>
+                <p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-2">
+                  Building ethical pipelines inside content creation hubs is no longer optional. This piece reviews modern, metadata-aware watermarking APIs.
+                </p>
+              </div>
+
+              <div class="flex items-center justify-between pt-4 border-t border-slate-100 dark:border-slate-800/80">
+                <div class="flex items-center gap-2">
+                  <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=80&h=80&q=80" alt="Author" class="h-7 w-7 rounded-full object-cover">
+                  <span class="text-xs font-semibold text-slate-700 dark:text-slate-300 hover:underline cursor-pointer">Elena R.</span>
+                </div>
+                <div class="flex items-center gap-3 text-slate-400">
+                  <button class="flex items-center gap-1 text-xs text-rose-500 transition-colors font-semibold">
+                    <i class="fa-solid fa-heart"></i> <span class="font-medium">1.2k</span>
+                  </button>
+                  <button class="flex items-center gap-1 text-xs hover:text-brand-500 transition-colors">
+                    <i class="fa-regular fa-bookmark"></i>
+                  </button>
+                </div>
               </div>
             </div>
           </article>
-          <article class="blog-card" data-reveal>
-            <img src="images/blog-3.svg" alt="Travel planning illustration" />
-            <div class="card-body">
-              <span class="tag">Travel</span>
-              <h3>Designing a minimalist travel itinerary for city breaks.</h3>
-              <p>Less clutter, more memorable experiences, and fewer headaches.</p>
-              <div class="card-meta">
-                <span>By Sara Kim</span>
-                <a href="#blog">Read more</a>
+
+        </div>
+
+      </section>
+
+      <aside class="lg:col-span-4 space-y-6">
+        
+        <div class="bg-white dark:bg-neutral-900 rounded-2xl border border-slate-200/60 dark:border-slate-800/60 p-6 space-y-4">
+          <h3 class="text-sm font-bold tracking-wide uppercase text-slate-400 flex items-center gap-2">
+            <i class="fa-solid fa-arrow-trend-up text-brand-500"></i> Trending Categories
+          </h3>
+          <div class="flex flex-wrap gap-2">
+            <a href="#" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-50 dark:bg-slate-950 border border-slate-200/80 dark:border-slate-800/80 hover:border-brand-500 transition-all">#Technology</a>
+            <a href="#" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-50 dark:bg-slate-950 border border-slate-200/80 dark:border-slate-800/80 hover:border-brand-500 transition-all">#AIandCoding</a>
+            <a href="#" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-50 dark:bg-slate-950 border border-slate-200/80 dark:border-slate-800/80 hover:border-brand-500 transition-all">#CyberSecurity</a>
+            <a href="#" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-50 dark:bg-slate-950 border border-slate-200/80 dark:border-slate-800/80 hover:border-brand-500 transition-all">#Photography</a>
+            <a href="#" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-50 dark:bg-slate-950 border border-slate-200/80 dark:border-slate-800/80 hover:border-brand-500 transition-all">#TravelGuides</a>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-neutral-900 rounded-2xl border border-slate-200/60 dark:border-slate-800/60 p-6 space-y-4">
+          <h3 class="text-sm font-bold tracking-wide uppercase text-slate-400 flex items-center gap-2">
+            <i class="fa-solid fa-award text-violet-500"></i> Popular Authors
+          </h3>
+          <div class="divide-y divide-slate-100 dark:divide-slate-800/60">
+            
+            <div class="flex items-center justify-between py-3 first:pt-0 last:pb-0">
+              <div class="flex items-center gap-3">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=80&h=80&q=80" alt="Sarah Jenkins" class="h-9 w-9 rounded-full object-cover ring-2 ring-violet-500/15">
+                <div>
+                  <h4 class="text-xs font-bold text-slate-800 dark:text-slate-100">Sarah Jenkins</h4>
+                  <p class="text-[10px] text-slate-400">@sarah_codes</p>
+                </div>
               </div>
+              <button class="px-3 py-1 bg-brand-50 dark:bg-brand-950 text-brand-600 dark:text-brand-400 hover:bg-brand-600 hover:text-white dark:hover:bg-brand-600 rounded-lg text-xs font-bold transition-all">Follow</button>
             </div>
-          </article>
-        </div>
-      </section>
 
-      <section class="section" id="categories">
-        <div class="section-heading">
-          <div>
-            <p class="eyebrow">Explore topics</p>
-            <h2>Popular categories</h2>
-          </div>
-        </div>
-        <div class="category-grid">
-          <a href="#search" class="category-card" data-reveal>Technology</a>
-          <a href="#search" class="category-card" data-reveal>Programming</a>
-          <a href="#search" class="category-card" data-reveal>AI</a>
-          <a href="#search" class="category-card" data-reveal>Business</a>
-          <a href="#search" class="category-card" data-reveal>Travel</a>
-          <a href="#search" class="category-card" data-reveal>Finance</a>
-          <a href="#search" class="category-card" data-reveal>Lifestyle</a>
-          <a href="#search" class="category-card" data-reveal>Health</a>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="section-heading">
-          <div>
-            <p class="eyebrow">Fresh picks</p>
-            <h2>Latest articles</h2>
-          </div>
-        </div>
-        <div class="article-list">
-          <article class="article-row" data-reveal>
-            <div>
-              <span class="tag">Finance</span>
-              <h3>Simple budgeting principles that reduce stress quickly.</h3>
-              <p>Financial clarity is often a result of structure and patience.</p>
-            </div>
-            <a href="#blog" class="text-link">Read</a>
-          </article>
-          <article class="article-row" data-reveal>
-            <div>
-              <span class="tag">Health</span>
-              <h3>How to build a sustainable wellness routine without burnout.</h3>
-              <p>Lean into consistency instead of intensity when you need lasting results.</p>
-            </div>
-            <a href="#blog" class="text-link">Read</a>
-          </article>
-          <article class="article-row" data-reveal>
-            <div>
-              <span class="tag">Programming</span>
-              <h3>Writing cleaner JavaScript with small, composable functions.</h3>
-              <p>Readable code is easier to maintain and easier to share.</p>
-            </div>
-            <a href="#blog" class="text-link">Read</a>
-          </article>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="section-heading">
-          <div>
-            <p class="eyebrow">Featured voices</p>
-            <h2>Meet the authors</h2>
-          </div>
-        </div>
-        <div class="author-grid">
-          <article class="author-card" data-reveal>
-            <img src="images/profile-placeholder.svg" alt="Author portrait" />
-            <h3>Jules Rivera</h3>
-            <p>12.4k followers</p>
-            <button class="btn btn-outline">Follow</button>
-          </article>
-          <article class="author-card" data-reveal>
-            <img src="images/profile-placeholder.svg" alt="Author portrait" />
-            <h3>Amira Patel</h3>
-            <p>9.8k followers</p>
-            <button class="btn btn-outline">Follow</button>
-          </article>
-        </div>
-      </section>
-
-      <section class="newsletter" data-reveal>
-        <h2>Get curated stories in your inbox.</h2>
-        <p>Join our newsletter for weekly highlights and fresh ideas.</p>
-        <form class="newsletter-form" id="newsletterForm">
-          <input type="email" placeholder="Enter your email" required />
-          <button type="submit" class="btn btn-primary">Subscribe</button>
-        </form>
-      </section>
-    </main>
-
-    <!-- LOGIN PAGE -->
-    <main id="login-view" class="view auth-shell">
-      <section class="auth-grid">
-        <div class="auth-hero">
-          <p class="eyebrow">Secure access</p>
-          <h1>Welcome back to your content hub.</h1>
-          <p>
-            Sign in to explore curated stories, publish your own ideas, and stay connected with a thriving writer community.
-          </p>
-          <ul class="benefit-list">
-            <li><i class="fa-solid fa-check"></i> Save favorite articles</li>
-            <li><i class="fa-solid fa-check"></i> Publish thoughts in minutes</li>
-            <li><i class="fa-solid fa-check"></i> Follow inspiring creators</li>
-          </ul>
-        </div>
-
-        <div class="auth-card">
-          <h2>Sign in</h2>
-          <p class="auth-subtitle">Access your account and continue reading.</p>
-          <form class="auth-form" id="loginForm">
-            <label>
-              <span>Email address</span>
-              <div class="input-wrap">
-                <i class="fa-solid fa-envelope"></i>
-                <input type="email" name="email" placeholder="you@example.com" required />
+            <div class="flex items-center justify-between py-3 first:pt-0 last:pb-0">
+              <div class="flex items-center gap-3">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=80&h=80&q=80" alt="John Doe" class="h-9 w-9 rounded-full object-cover">
+                <div>
+                  <h4 class="text-xs font-bold text-slate-800 dark:text-slate-100">Marcus Chen</h4>
+                  <p class="text-[10px] text-slate-400">@marcus_dev</p>
+                </div>
               </div>
-            </label>
-            <label>
-              <span>Password</span>
-              <div class="input-wrap">
-                <i class="fa-solid fa-lock"></i>
-                <input type="password" name="password" placeholder="Enter your password" required />
-              </div>
-            </label>
-            <div class="row-between">
-              <label class="checkbox-row">
-                <input type="checkbox" />
-                <span>Remember me</span>
-              </label>
-              <a href="#">Forgot password?</a>
+              <button class="px-3 py-1 bg-brand-50 dark:bg-brand-950 text-brand-600 dark:text-brand-400 hover:bg-brand-600 hover:text-white dark:hover:bg-brand-600 rounded-lg text-xs font-bold transition-all">Follow</button>
             </div>
-            <button class="btn btn-primary btn-full" type="submit">Login</button>
-          </form>
-          <div class="auth-divider">Or continue with</div>
-          <div class="social-buttons">
-            <button class="btn btn-outline"><i class="fa-brands fa-google"></i> Google</button>
-            <button class="btn btn-outline"><i class="fa-brands fa-github"></i> GitHub</button>
-          </div>
-          <p class="auth-switch">
-            New here?
-            <a href="#register">Create an account</a>
-          </p>
-        </div>
-      </section>
-    </main>
 
-    <!-- REGISTER PAGE -->
-    <main id="register-view" class="view auth-shell">
-      <section class="auth-card" style="margin:0 auto;">
-        <h1>Create your account</h1>
-        <p>Join thousands of storytellers and writers.</p>
-        <form class="auth-form" id="registerForm">
-          <label>
-            Full name
-            <input type="text" name="name" required />
-          </label>
-          <label>
-            Username
-            <input type="text" name="username" required />
-          </label>
-          <label>
-            Email
-            <input type="email" name="email" required />
-          </label>
-          <label>
-            Password
-            <input type="password" name="password" required />
-          </label>
-          <label>
-            Confirm password
-            <input type="password" name="confirmPassword" required />
-          </label>
-          <label>
-            Profile image
-            <input type="file" name="avatar" accept="image/*" />
-          </label>
-          <button class="btn btn-primary btn-full" type="submit">Register</button>
-        </form>
-        <p class="auth-switch">
-          Already have an account?
-          <a href="#login">Sign in</a>
-        </p>
-      </section>
-    </main>
-
-    <!-- BLOG PAGE -->
-    <main id="blog-view" class="view blog-layout">
-      <article class="blog-post-card">
-        <img src="images/blog-1.svg" alt="Featured article illustration" />
-        <div class="blog-content">
-          <span class="tag">Technology</span>
-          <h1>How AI is reshaping modern product workflows</h1>
-          <div class="post-meta">
-            <span>By Maya Chen</span>
-            <span>July 11, 2026</span>
-            <span>6 min read</span>
-          </div>
-          <p>
-            Modern teams are moving faster, but only when tools reduce friction rather than add it.
-            Across product design, operations, and customer support, AI is changing the rhythm of work.
-          </p>
-          <p>
-            The most effective implementations begin with small automation wins: summarizing meetings,
-            drafting content, surfacing insights, and classifying requests. These improvements free people
-            to focus on judgment, empathy, and creativity.
-          </p>
-          <p>
-            The next wave of growth will come from organizations that learn to combine human insight with
-            automation responsibly, with clear guardrails and a strong sense of context.
-          </p>
-          <div class="action-row">
-            <button class="icon-btn" data-like><i class="fa-regular fa-heart"></i> 84</button>
-            <button class="icon-btn" data-bookmark><i class="fa-regular fa-bookmark"></i> Save</button>
-            <button class="icon-btn"><i class="fa-solid fa-share-nodes"></i> Share</button>
           </div>
         </div>
-      </article>
 
-      <aside class="sidebar-card">
-        <h2>Comments</h2>
-        <form id="commentForm" class="comment-form">
-          <textarea placeholder="Leave a thoughtful comment..." required></textarea>
-          <button class="btn btn-primary" type="submit">Post comment</button>
-        </form>
-        <div class="comment-list">
-          <div class="comment-item">
-            <strong>Nora</strong>
-            <p>Really enjoyed the practical angle. This feels grounded and useful.</p>
-          </div>
-          <div class="comment-item">
-            <strong>Leo</strong>
-            <p>Love the emphasis on human judgment alongside automation.</p>
-          </div>
+        <div class="bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800/80 rounded-2xl p-5 space-y-3">
+          <h4 class="text-xs font-bold uppercase text-slate-500 tracking-wider flex items-center gap-1.5">
+            <i class="fa-solid fa-gavel text-slate-400"></i> Copyright Protection
+          </h4>
+          <p class="text-[11px] text-slate-500 leading-relaxed">
+            All user uploads are strictly processed for unique watermarking hashings and log parameters. Re-uploading of intellectual properties without explicitly checked permissions is blockable.
+          </p>
+          <a href="#" class="text-[11px] font-bold text-brand-600 dark:text-brand-400 hover:underline flex items-center gap-1">
+            Read Community Rules & DMCA Policies <i class="fa-solid fa-arrow-right-long text-[9px]"></i>
+          </a>
         </div>
+
       </aside>
 
-      <section class="section" style="grid-column: 1 / -1;">
-        <div class="section-heading">
+    </div>
+    </div>
+
+    <section id="writeSection" class="mt-16 bg-white dark:bg-neutral-900 rounded-3xl border border-slate-200/60 dark:border-slate-800/60 p-8 shadow-xl shadow-slate-200/20">
+      <div class="max-w-7xl mx-auto">
+        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mb-8">
           <div>
-            <p class="eyebrow">Related reads</p>
-            <h2>You might also like</h2>
+            <p class="text-xs font-semibold uppercase tracking-[0.2em] text-brand-600">Create your next story</p>
+            <h2 class="mt-3 text-3xl font-extrabold text-slate-900 dark:text-white">Write, save, and publish in one workspace.</h2>
+          </div>
+          <div class="space-x-3">
+            <button type="button" onclick="document.getElementById('blogTitle').focus()" class="rounded-2xl bg-brand-600 px-5 py-3 text-sm font-semibold text-white hover:bg-brand-700 transition-all">Start drafting</button>
+            <a href="#top" class="rounded-2xl border border-slate-200 dark:border-slate-800 px-5 py-3 text-sm font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-950 transition-all">Back to top</a>
           </div>
         </div>
-        <div class="card-grid">
-          <article class="blog-card">
-            <img src="images/blog-2.svg" alt="Remote work article" />
-            <div class="card-body">
-              <span class="tag">Lifestyle</span>
-              <h3>Building a calm remote work ritual that actually lasts.</h3>
-              <a href="#blog">Read more</a>
-            </div>
-          </article>
-          <article class="blog-card">
-            <img src="images/blog-3.svg" alt="Travel article" />
-            <div class="card-body">
-              <span class="tag">Travel</span>
-              <h3>Designing a minimalist travel itinerary for city breaks.</h3>
-              <a href="#blog">Read more</a>
-            </div>
-          </article>
-        </div>
-      </section>
-    </main>
 
-    <!-- PROFILE PAGE -->
-    <main id="profile-view" class="view profile-shell">
-      <section class="profile-card">
-        <img src="images/profile-placeholder.svg" alt="User avatar" />
-        <div>
-          <h1>Amelia Brooks</h1>
-          <p>@ameliawrites • Product storyteller</p>
-          <div class="profile-stats">
-            <div><strong>128</strong><span>Followers</span></div>
-            <div><strong>94</strong><span>Following</span></div>
-            <div><strong>21</strong><span>Blogs</span></div>
+        <form id="blogPostForm" class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          <div class="lg:col-span-8 space-y-6">
+            <div class="bg-slate-50 dark:bg-neutral-950 rounded-3xl border border-slate-200/60 dark:border-slate-800/60 p-6 shadow-sm">
+              <label for="blogTitle" class="block text-xs font-bold uppercase tracking-[0.2em] text-slate-400 dark:text-slate-500 mb-3">Story Title</label>
+              <input id="blogTitle" type="text" required placeholder="Give your masterpiece a striking headline..." class="w-full rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/80 px-5 py-4 text-lg font-semibold text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-500/40" />
+            </div>
+
+            <div class="bg-slate-50 dark:bg-neutral-950 rounded-3xl border border-slate-200/60 dark:border-slate-800/60 p-6 shadow-sm">
+              <div class="flex flex-wrap items-center gap-2 py-2 px-3 rounded-3xl bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800/60 mb-6">
+                <button type="button" class="p-2 rounded-2xl hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 text-sm font-semibold">B</button>
+                <button type="button" class="p-2 rounded-2xl hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 text-sm font-semibold italic">I</button>
+                <button type="button" class="p-2 rounded-2xl hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 text-sm font-semibold underline">U</button>
+                <span class="h-4 w-px bg-slate-200 dark:bg-slate-800"></span>
+                <button type="button" class="p-2 rounded-2xl hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 text-sm font-semibold"><i class="fa-solid fa-link"></i></button>
+                <button type="button" class="p-2 rounded-2xl hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 text-sm font-semibold"><i class="fa-solid fa-quote-left"></i></button>
+                <button type="button" class="p-2 rounded-2xl hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 text-sm font-semibold"><i class="fa-solid fa-code"></i></button>
+              </div>
+              <label for="blogContent" class="block text-xs font-bold uppercase tracking-[0.2em] text-slate-400 dark:text-slate-500 mb-3">Body Content</label>
+              <textarea id="blogContent" rows="12" required placeholder="Tell your story. Support your points with evidence, and engage your reader base..." class="w-full rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/80 px-5 py-5 text-base leading-relaxed text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-500/40"></textarea>
+            </div>
+
+            <div class="bg-slate-50 dark:bg-neutral-950 rounded-3xl border border-slate-200/60 dark:border-slate-800/60 p-6 shadow-sm">
+              <h3 class="text-sm font-bold uppercase tracking-[0.2em] text-slate-400 dark:text-slate-500 mb-3">Attach Media Assets</h3>
+              <label for="mediaUpload" class="group relative flex flex-col items-center justify-center gap-4 rounded-3xl border-2 border-dashed border-slate-200 dark:border-slate-800 p-8 text-center bg-white dark:bg-slate-900/60 cursor-pointer hover:border-brand-500 dark:hover:border-brand-500 transition-all">
+                <div class="h-12 w-12 rounded-2xl bg-brand-50 dark:bg-brand-950/50 flex items-center justify-center text-brand-600 dark:text-brand-400 text-2xl"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+                <div>
+                  <p class="text-sm font-semibold text-slate-900 dark:text-white">Drag & drop files here, or browse locally</p>
+                  <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Supports PNG, JPG, WebP, and MP4 up to 50MB</p>
+                </div>
+                <input id="mediaUpload" type="file" multiple accept="image/*,video/*" class="sr-only" />
+              </label>
+              <div id="previewGrid" class="hidden grid grid-cols-2 sm:grid-cols-3 gap-4 pt-4 border-t border-slate-200 dark:border-slate-800/80"></div>
+            </div>
           </div>
-        </div>
-      </section>
 
-      <section class="profile-tabs">
-        <button class="active">Published</button>
-        <button>Drafts</button>
-        <button>Bookmarks</button>
-        <button>Settings</button>
-      </section>
-
-      <section class="card-grid">
-        <article class="blog-card">
-          <img src="images/blog-1.svg" alt="Blog cover" />
-          <div class="card-body">
-            <h3>Designing content systems that scale.</h3>
-            <p>How strategic structure creates room for creativity.</p>
-          </div>
-        </article>
-        <article class="blog-card">
-          <img src="images/blog-2.svg" alt="Blog cover" />
-          <div class="card-body">
-            <h3>Small rituals that make writing easier.</h3>
-            <p>Habit design can be surprisingly powerful.</p>
-          </div>
-        </article>
-      </section>
-    </main>
-
-    <!-- SEARCH PAGE -->
-    <main id="search-view" class="view search-shell">
-      <section class="search-bar-card">
-        <input type="search" id="searchInput" placeholder="Search blogs, authors, or topics" />
-        <button class="btn btn-primary">Search</button>
-      </section>
-
-      <section class="search-results">
-        <div class="filter-row">
-          <button class="btn btn-outline active">Latest</button>
-          <button class="btn btn-outline">Popular</button>
-          <button class="btn btn-outline">Tags</button>
-        </div>
-        <div class="card-grid">
-          <article class="blog-card">
-            <img src="images/blog-1.svg" alt="Blog cover" />
-            <div class="card-body">
-              <span class="tag">AI</span>
-              <h3>Practical ways teams are using AI responsibly.</h3>
-              <p>Guided examples for thoughtful automation.</p>
+          <div class="lg:col-span-4 space-y-6">
+            <div class="bg-white dark:bg-neutral-950 rounded-3xl border border-slate-200/60 dark:border-slate-800/60 p-6 shadow-sm">
+              <h3 class="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 dark:text-slate-500">Metadata Details</h3>
+              <div class="space-y-4 mt-5">
+                <div>
+                  <label for="category" class="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-2">Primary Category</label>
+                  <select id="category" required class="w-full rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/80 px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-500/40">
+                    <option value="">Choose category...</option>
+                    <option value="Technology">Technology</option>
+                    <option value="AI & Coding">AI & Coding</option>
+                    <option value="Cybersecurity">Cybersecurity</option>
+                    <option value="Photography">Photography</option>
+                    <option value="Travel Guides">Travel Guides</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="tagsInput" class="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-2">Tags (comma-separated)</label>
+                  <input id="tagsInput" type="text" placeholder="e.g. backend, serverless, webdev" class="w-full rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/80 px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-brand-500/40" />
+                </div>
+              </div>
             </div>
-          </article>
-          <article class="blog-card">
-            <img src="images/blog-2.svg" alt="Blog cover" />
-            <div class="card-body">
-              <span class="tag">Lifestyle</span>
-              <h3>How to keep routines simple and sustainable.</h3>
-              <p>Consistency beats intensity when the goal is longevity.</p>
-            </div>
-          </article>
-        </div>
-      </section>
-    </main>
 
-    <!-- WRITE PAGE -->
-    <main id="write-view" class="view compose-shell">
-      <section class="compose-card">
-        <h1>Write a new story</h1>
-        <form class="compose-form">
-          <label>
-            Blog title
-            <input type="text" placeholder="A compelling headline" required />
-          </label>
-          <label>
-            Thumbnail upload
-            <input type="file" accept="image/*" />
-          </label>
-          <label>
-            Category
-            <select>
-              <option>Technology</option>
-              <option>Programming</option>
-              <option>AI</option>
-              <option>Business</option>
-              <option>Travel</option>
-              <option>Finance</option>
-              <option>Lifestyle</option>
-              <option>Health</option>
-            </select>
-          </label>
-          <label>
-            Tags
-            <input type="text" placeholder="ai, startup, productivity" />
-          </label>
-          <label>
-            Story content
-            <textarea rows="14" placeholder="Start writing your article here..."></textarea>
-          </label>
-          <div class="action-row">
-            <button class="btn btn-outline" type="button">Save draft</button>
-            <button class="btn btn-primary" type="submit">Publish</button>
+            <div class="bg-gradient-to-tr from-brand-600/10 to-violet-500/10 dark:from-brand-950/40 dark:to-violet-950/40 rounded-3xl border border-brand-500/20 p-6 shadow-sm">
+              <div class="flex items-center gap-2 text-brand-600 dark:text-brand-400 mb-4">
+                <i class="fa-solid fa-shield-halved text-sm animate-pulse"></i>
+                <h4 class="text-xs font-bold tracking-[0.2em] uppercase">Asset Guard Enabled</h4>
+              </div>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed">By publishing, your attached assets receive embedded metadata copyright hashes. Unauthorized re-hosting on competing platforms will be dynamically flagged.</p>
+              <label class="mt-5 flex items-center gap-2 cursor-pointer select-none text-[11px] text-slate-600 dark:text-slate-300">
+                <input type="checkbox" checked required class="h-4 w-4 rounded border-slate-300 dark:border-slate-800 text-brand-600 focus:ring-brand-500" />
+                <span class="font-medium">I assert absolute ownership over these materials.</span>
+              </label>
+            </div>
+
+            <div class="bg-white dark:bg-neutral-950 rounded-3xl border border-slate-200/60 dark:border-slate-800/60 p-6 shadow-sm space-y-4">
+              <button type="submit" class="w-full rounded-3xl bg-brand-600 py-3 text-sm font-bold text-white shadow-lg hover:bg-brand-700 transition-all flex items-center justify-center gap-2"> <i class="fa-solid fa-paper-plane text-xs"></i> Publish to Network</button>
+              <button type="button" id="saveDraftBtn" class="w-full rounded-3xl border border-slate-200 dark:border-slate-800 py-3 text-sm font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-950 transition-all">Save Draft</button>
+            </div>
           </div>
         </form>
-      </section>
-    </main>
+      </div>
+    </section>
 
-    <!-- SHARED FOOTER -->
-    <footer class="footer">
-      <div>
-        <h3>BlogSphere</h3>
-        <p>Stories, ideas, and practical insight for modern readers.</p>
+  <div id="successModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm hidden">
+    <div class="bg-white dark:bg-neutral-900 border border-slate-200 dark:border-slate-800 p-8 rounded-3xl max-w-sm w-full mx-4 text-center space-y-6 shadow-2xl animate-[scaleUp_0.2s_ease-out]">
+      <div class="h-16 w-16 rounded-full bg-emerald-100 dark:bg-emerald-950/50 text-emerald-500 flex items-center justify-center mx-auto text-3xl">
+        <i class="fa-solid fa-circle-check"></i>
       </div>
-      <div>
-        <h4>Quick links</h4>
-        <a href="#home">Home</a>
-        <a href="#search">Search</a>
-        <a href="#write">Write</a>
+      <div class="space-y-2">
+        <h3 class="text-xl font-bold dark:text-white" id="modalHeading">Blog Published!</h3>
+        <p class="text-sm text-slate-500 dark:text-slate-400" id="modalText">Your story is live and secure in the decentralized registry database.</p>
       </div>
-      <div>
-        <h4>Follow</h4>
-        <a href="#"><i class="fa-brands fa-x-twitter"></i> Twitter</a>
-        <a href="#"><i class="fa-brands fa-instagram"></i> Instagram</a>
-        <a href="#"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
-      </div>
-    </footer>
+      <button type="button" onclick="closeSuccessModal()" class="w-full py-3 bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm rounded-xl shadow-md transition-all">
+        Back to Dashboard
+      </button>
+    </div>
+  </div>
 
-    <script src="script.js"></script>
-  </body>
+  </main>
+
+  <footer class="bg-white dark:bg-neutral-950 border-t border-slate-200 dark:border-slate-800/80 py-10 mt-20 transition-colors">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+      
+      <div class="flex items-center gap-2">
+        <span class="p-1.5 bg-brand-600 text-white rounded-lg"><i class="fa-solid fa-feather-pointed text-sm"></i></span>
+        <span class="text-lg font-extrabold tracking-tight dark:text-white">BlogSphere</span>
+      </div>
+
+      <div class="flex flex-wrap justify-center gap-6 text-xs font-medium text-slate-400">
+        <a href="#" class="hover:text-slate-600 dark:hover:text-slate-200 transition-colors">Privacy Policy</a>
+        <a href="#" class="hover:text-slate-600 dark:hover:text-slate-200 transition-colors">Terms of Service</a>
+        <a href="#" class="hover:text-slate-600 dark:hover:text-slate-200 transition-colors">DMCA Notices</a>
+        <a href="#" class="hover:text-slate-600 dark:hover:text-slate-200 transition-colors">API documentation</a>
+      </div>
+
+      <p class="text-xs text-slate-400">&copy; 2026 BlogSphere platform. Verified Secure.</p>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+  <script src="js/write.js"></script>
+</body>
 </html>
