@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BlogSphere | Write Blog</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="min-h-screen bg-slate-50">
+  <header class="border-b border-slate-200 bg-white/90 backdrop-blur">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+      <a href="home.html" class="flex items-center gap-3">
+        <div class="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-tr from-brand-600 to-violet-500 text-white">
+          <i class="fa-solid fa-feather-pointed"></i>
+        </div>
+        <div>
+          <p class="text-lg font-bold text-slate-900">BlogSphere</p>
+          <p class="text-xs text-slate-500">Write & publish</p>
+        </div>
+      </a>
+      <a href="home.html" class="rounded-xl border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700">Back to dashboard</a>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
+    <div class="card-surface p-6 sm:p-8">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-sm font-semibold uppercase tracking-[0.25em] text-brand-600">Create new blog</p>
+          <h1 class="mt-2 text-3xl font-bold text-slate-900">Publish your next original story</h1>
+        </div>
+        <span class="rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-700">Original content protected</span>
+      </div>
+
+      <form class="mt-8 space-y-6">
+        <div>
+          <label class="mb-2 block text-sm font-semibold text-slate-700">Blog title</label>
+          <input type="text" class="w-full rounded-2xl border border-slate-200 px-4 py-3" placeholder="Enter your blog title" />
+        </div>
+
+        <div class="grid gap-4 md:grid-cols-2">
+          <div>
+            <label class="mb-2 block text-sm font-semibold text-slate-700">Category</label>
+            <select class="w-full rounded-2xl border border-slate-200 px-4 py-3">
+              <option>Technology</option>
+              <option>Design</option>
+              <option>Writing</option>
+              <option>Business</option>
+            </select>
+          </div>
+          <div>
+            <label class="mb-2 block text-sm font-semibold text-slate-700">Tags</label>
+            <input type="text" class="w-full rounded-2xl border border-slate-200 px-4 py-3" placeholder="AI, Productivity, Writing" />
+          </div>
+        </div>
+
+        <div>
+          <label class="mb-2 block text-sm font-semibold text-slate-700">Cover image</label>
+          <label class="flex cursor-pointer flex-col items-center justify-center rounded-3xl border border-dashed border-slate-300 bg-slate-50 px-6 py-10 text-center">
+            <i class="fa-solid fa-cloud-arrow-up text-2xl text-brand-600"></i>
+            <p class="mt-3 text-sm font-semibold text-slate-700">Drag & drop or browse files</p>
+            <p class="mt-1 text-sm text-slate-500">JPG, PNG, WEBP, MP4 • original content only</p>
+            <input type="file" class="hidden" />
+          </label>
+        </div>
+
+        <div>
+          <label class="mb-2 block text-sm font-semibold text-slate-700">Blog content</label>
+          <textarea rows="10" class="w-full rounded-2xl border border-slate-200 px-4 py-3" placeholder="Write your blog here..."></textarea>
+        </div>
+
+        <div class="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-800">
+          <p class="font-semibold">Original content notice</p>
+          <p class="mt-1">Only upload content you created or have permission to use. Copyright violations will be flagged.</p>
+        </div>
+
+        <div class="flex flex-wrap gap-3">
+          <button type="button" class="rounded-2xl border border-slate-200 px-4 py-3 text-sm font-semibold text-slate-700">Save draft</button>
+          <button type="submit" class="btn-primary w-auto px-6">Publish</button>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

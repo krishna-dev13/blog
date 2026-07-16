@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BlogSphere | Profile</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Configure Tailwind to match your premium vibrant dashboard theme -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#f5f3ff',
+              100: '#ede9fe',
+              500: '#8b5cf6',
+              600: '#7c3aed',
+              700: '#6d28d9',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .card-premium {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(241, 245, 249, 0.9);
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.04), 0 1px 3px -1px rgba(0, 0, 0, 0.02);
+    }
+    /* Input design transition effects */
+    .form-input-focus {
+      transition: all 0.2s ease-in-out;
+    }
+    .form-input-focus:focus {
+      border-color: #8b5cf6;
+      box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.15);
+      outline: none;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-slate-50/50 text-slate-800 antialiased selection:bg-purple-500 selection:text-white">
+
+  <!-- Floating Gradient Accents for Visual Depth -->
+  <div class="absolute top-0 right-1/4 -z-10 h-96 w-96 rounded-full bg-gradient-to-tr from-indigo-300/20 to-purple-300/20 blur-3xl"></div>
+  <div class="absolute top-1/3 left-10 -z-10 h-72 w-72 rounded-full bg-gradient-to-tr from-pink-300/10 to-violet-300/10 blur-3xl"></div>
+
+  <!-- Header Section -->
+  <header class="sticky top-0 z-50 border-b border-slate-100 bg-white/85 backdrop-blur-md">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+      <!-- Logo -->
+      <a href="home.html" class="flex items-center gap-3 group">
+        <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 text-white shadow-lg shadow-purple-500/20 group-hover:scale-105 transition-transform duration-300">
+          <i class="fa-solid fa-feather-pointed text-lg"></i>
+        </div>
+        <div>
+          <p class="text-xl font-extrabold tracking-tight bg-gradient-to-r from-slate-900 to-indigo-950 bg-clip-text text-transparent">BlogSphere</p>
+          <p class="text-[10px] font-bold uppercase tracking-wider text-purple-600">Creator Hub</p>
+        </div>
+      </a>
+
+      <!-- Home Action -->
+      <a href="home.html" class="rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 hover:text-slate-900 shadow-sm transition-all flex items-center gap-2">
+        <i class="fa-solid fa-arrow-left text-xs"></i> Back to Dashboard
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Profile Page Grid -->
+  <main class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    
+    <div class="grid gap-8 lg:grid-cols-[1.1fr_1.9fr]">
+      
+      <!-- LEFT COLUMN: Live Public Card Preview -->
+      <section class="space-y-6">
+        <div class="text-left">
+          <h2 class="text-lg font-bold text-slate-900 tracking-tight">Public Preview</h2>
+          <p class="text-xs text-slate-500">This is how your creator card looks to the public.</p>
+        </div>
+
+        <div class="card-premium rounded-3xl overflow-hidden shadow-xl border border-slate-100">
+          <!-- Profile Decorative Card Banner -->
+          <div class="h-32 bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 relative">
+            <div class="absolute inset-0 bg-black/10"></div>
+          </div>
+          
+          <!-- Card Body Content -->
+          <div class="p-6 pt-0 relative">
+            <!-- Profile Avatar Ringed -->
+            <div class="relative -mt-16 mb-4 inline-block">
+              <img id="preview-avatar" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=140&h=140&q=80" 
+                   class="h-28 w-28 rounded-full object-cover border-4 border-white shadow-md bg-white" alt="Avatar">
+              <span class="absolute bottom-2 right-2 h-4.5 w-4.5 rounded-full bg-emerald-500 ring-4 ring-white"></span>
+            </div>
+
+            <!-- Profile Info -->
+            <div class="space-y-2">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <div>
+                  <h1 id="preview-name" class="text-2xl font-black text-slate-900 leading-tight">yalina holkar</h1>
+                  <p class="text-sm font-semibold text-purple-600 flex items-center gap-1.5 mt-0.5">
+                    <span id="preview-username">@yalinian</span> 
+                    <span class="text-slate-300">•</span> 
+                    <span id="preview-profession" class="text-slate-500 font-medium">actor</span>
+                  </p>
+                </div>
+              </div>
+
+              <p id="preview-bio" class="text-sm text-slate-600 leading-relaxed pt-2 border-t border-slate-100">
+                wife of jasii urf (jaskirat).
+              </p>
+
+              <!-- Social Tags & Contact Info -->
+              <div class="flex flex-wrap gap-2 pt-4">
+                <span id="preview-tag-location" class="inline-flex items-center gap-1.5 rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600">
+                  <i class="fa-solid fa-location-dot text-slate-400"></i> <span id="preview-location-text">mumbai</span>
+                </span>
+                <span id="preview-tag-web" class="inline-flex items-center gap-1.5 rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600">
+                  <i class="fa-solid fa-globe text-slate-400"></i> <span id="preview-website-text">yalinaholkar.dev</span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- RIGHT COLUMN: Edit Form Panel -->
+      <section class="card-premium rounded-3xl p-6 sm:p-8">
+        <div>
+          <h2 class="text-2xl font-black text-slate-900 tracking-tight">Edit Creator Profile</h2>
+          <p class="text-sm text-slate-500 mt-1">Customize your digital representation and professional portfolio options.</p>
+        </div>
+
+        <form id="profile-form" class="mt-8 space-y-6">
+          <!-- Avatar Uploader Row -->
+          <div class="flex flex-wrap items-center gap-5 pb-6 border-b border-slate-100">
+            <div class="relative group">
+              <img id="form-avatar-thumb" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=140&h=140&q=80" 
+                   class="h-16 w-16 rounded-full object-cover border border-slate-200" alt="Avatar Thumbnail">
+              <div class="absolute inset-0 bg-black/40 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
+                <i class="fa-solid fa-camera text-white text-xs"></i>
+              </div>
+            </div>
+            <div>
+              <p class="text-sm font-bold text-slate-800">Profile Picture</p>
+              <p class="text-xs text-slate-400 mt-0.5">JPG, PNG, or WEBP. Max size 2MB.</p>
+              <div class="mt-2.5">
+                <label for="avatar-input" class="inline-flex items-center gap-2 rounded-xl bg-purple-50 px-3.5 py-2 text-xs font-bold text-purple-700 hover:bg-purple-100 cursor-pointer transition-colors">
+                  <i class="fa-solid fa-cloud-arrow-up"></i> Upload New Photo
+                </label>
+                <input id="avatar-input" type="file" accept="image/*" class="hidden">
+              </div>
+            </div>
+          </div>
+
+          <!-- Basic Info Subgrid -->
+          <div class="grid gap-5 sm:grid-cols-2">
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Display Name</label>
+              <div class="relative">
+                <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-400">
+                  <i class="fa-solid fa-user text-sm"></i>
+                </span>
+                <input type="text" id="input-name" value="Maya Carter" class="form-input-focus w-full rounded-2xl border border-slate-200 py-3 pl-10 pr-4 text-sm font-medium text-slate-900 bg-white" placeholder="John Doe">
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Username</label>
+              <div class="relative">
+                <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-400">
+                  <i class="fa-solid fa-at text-sm"></i>
+                </span>
+                <input type="text" id="input-username" value="@mayacarter" class="form-input-focus w-full rounded-2xl border border-slate-200 py-3 pl-10 pr-4 text-sm font-medium text-slate-900 bg-white" placeholder="username">
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Profession / Role</label>
+              <div class="relative">
+                <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-400">
+                  <i class="fa-solid fa-briefcase text-sm"></i>
+                </span>
+                <input type="text" id="input-profession" value="Writer • Creator" class="form-input-focus w-full rounded-2xl border border-slate-200 py-3 pl-10 pr-4 text-sm font-medium text-slate-900 bg-white" placeholder="E.g. Creative Designer">
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Location</label>
+              <div class="relative">
+                <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-400">
+                  <i class="fa-solid fa-location-dot text-sm"></i>
+                </span>
+                <input type="text" id="input-location" value="San Francisco, CA" class="form-input-focus w-full rounded-2xl border border-slate-200 py-3 pl-10 pr-4 text-sm font-medium text-slate-900 bg-white" placeholder="City, Country">
+              </div>
+            </div>
+          </div>
+
+          <!-- Web Details & Bio -->
+          <div class="space-y-5">
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Website</label>
+              <div class="relative">
+                <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-400">
+                  <i class="fa-solid fa-globe text-sm"></i>
+                </span>
+                <input type="text" id="input-website" value="mayacarter.dev" class="form-input-focus w-full rounded-2xl border border-slate-200 py-3 pl-10 pr-4 text-sm font-medium text-slate-900 bg-white" placeholder="https://mywebsite.com">
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Short Bio</label>
+              <textarea id="input-bio" rows="3" class="form-input-focus w-full rounded-2xl border border-slate-200 p-4 text-sm font-medium text-slate-900 bg-white resize-none" placeholder="Tell your audience a little story about yourself...">Focused on publishing original stories with a secure creator workflow.</p></textarea>
+            </div>
+          </div>
+
+          <!-- Action Footers -->
+          <div class="pt-6 border-t border-slate-100 flex items-center justify-end gap-3">
+            <button type="button" class="rounded-2xl px-5 py-3 text-sm font-semibold text-slate-600 hover:bg-slate-100 transition-all">
+              Cancel
+            </button>
+            <button type="submit" class="rounded-2xl bg-gradient-to-r from-indigo-500 to-purple-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-500/20 hover:brightness-110 transition-all">
+              Save Profile Changes
+            </button>
+          </div>
+        </form>
+      </section>
+
+    </div>
+  </main>
+
+  <script>
+    // Live update preview elements when user types
+    const nameInput = document.getElementById('input-name');
+    const usernameInput = document.getElementById('input-username');
+    const professionInput = document.getElementById('input-profession');
+    const locationInput = document.getElementById('input-location');
+    const websiteInput = document.getElementById('input-website');
+    const bioInput = document.getElementById('input-bio');
+    const avatarInput = document.getElementById('avatar-input');
+
+    const previewName = document.getElementById('preview-name');
+    const previewUsername = document.getElementById('preview-username');
+    const previewProfession = document.getElementById('preview-profession');
+    const previewLocation = document.getElementById('preview-location-text');
+    const previewWebsite = document.getElementById('preview-website-text');
+    const previewBio = document.getElementById('preview-bio');
+    
+    const previewAvatar = document.getElementById('preview-avatar');
+    const formAvatarThumb = document.getElementById('form-avatar-thumb');
+
+    // Attach listeners for live UI editing
+    nameInput.addEventListener('input', (e) => { previewName.textContent = e.target.value || 'Your Name'; });
+    
+    usernameInput.addEventListener('input', (e) => { 
+      let val = e.target.value;
+      if (val && !val.startsWith('@')) val = '@' + val;
+      previewUsername.textContent = val || '@username'; 
+    });
+
+    professionInput.addEventListener('input', (e) => { previewProfession.textContent = e.target.value || 'Profession'; });
+    locationInput.addEventListener('input', (e) => { previewLocation.textContent = e.target.value || 'Location'; });
+    websiteInput.addEventListener('input', (e) => { previewWebsite.textContent = e.target.value || 'yourwebsite.com'; });
+    bioInput.addEventListener('input', (e) => { previewBio.textContent = e.target.value || 'Tell us about your work...'; });
+
+    // Avatar preview update
+    avatarInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          previewAvatar.src = event.target.result;
+          formAvatarThumb.src = event.target.result;
+        }
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // Form Submit visual alert
+    document.getElementById('profile-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Profile updated successfully!');
+    });
+  </script>
+</body>
+</html>

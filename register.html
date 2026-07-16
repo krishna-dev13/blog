@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BlogSphere | Sign In</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="min-h-screen bg-grid">
+  <div class="auth-shell">
+    <div class="auth-panel">
+      <section class="auth-hero">
+        <div>
+          <div class="stat-pill"><i class="fa-solid fa-shield-halved"></i> Copyright-secure platform</div>
+          <h1 class="mt-4">Welcome back to a community of original storytellers.</h1>
+          <p class="mt-3 text-slate-600 leading-relaxed">Sign in to manage your publications, protect your drafts, and engage with a modern creator network.</p>
+        </div>
+        <div class="card-surface p-5">
+          <div class="flex items-center gap-3">
+            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=120&h=120&q=80" alt="Creator" class="h-14 w-14 rounded-2xl object-cover">
+            <div>
+              <p class="text-sm font-semibold text-slate-900">Creator Hub</p>
+              <p class="text-sm text-slate-500">Trusted publishing, smart protection, and clean discovery.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="auth-card">
+        <a href="register.html" class="mb-4 inline-flex items-center gap-2 text-sm font-semibold text-brand-600 hover:underline">
+          <i class="fa-solid fa-user-plus"></i> Create an account instead
+        </a>
+        <h2 class="text-2xl font-bold text-slate-900">Sign in to your account</h2>
+        <p class="mt-2 text-sm text-slate-500">Access your stories and dashboard securely.</p>
+
+        <form id="loginForm" class="mt-6 space-y-4" onsubmit="event.preventDefault(); localStorage.setItem('blog-logged-in', 'true'); window.location.href='home.html';">
+          
+          <div class="input-field">
+            <i class="fa-regular fa-envelope text-slate-400"></i>
+            <input type="email" placeholder="Email address" required />
+          </div>
+
+          <div class="input-field">
+            <i class="fa-solid fa-lock text-slate-400"></i>
+            <input type="password" placeholder="Password" required />
+          </div>
+
+          <div class="flex items-center justify-between text-sm pt-1">
+            <label class="flex items-center gap-2 text-slate-600 cursor-pointer">
+              <input type="checkbox" class="h-4 w-4 rounded border-slate-300 text-brand-600 focus:ring-brand-500" />
+              <span>Remember me</span>
+            </label>
+            <a href="#" class="font-semibold text-brand-600 hover:text-brand-700 hover:underline">Forgot password?</a>
+          </div>
+
+          <button type="submit" class="btn-primary mt-2">Sign in</button>
+        </form>
+
+        <div class="mt-6 flex items-center gap-3 text-sm text-slate-500">
+          <span class="h-px flex-1 bg-slate-200"></span>
+          <span>or</span>
+          <span class="h-px flex-1 bg-slate-200"></span>
+        </div>
+
+        <button type="button" class="btn-ghost mt-4 flex w-full items-center justify-center gap-2" onclick="window.location.href='home.html'">
+          <i class="fa-brands fa-google"></i> Continue with Google
+        </button>
+      </section>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
