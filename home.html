@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BlogSphere | Home Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Configure Tailwind to support custom transition values and brand gradients -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#f5f3ff',
+              100: '#ede9fe',
+              500: '#8b5cf6',
+              600: '#7c3aed',
+              700: '#6d28d9',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* Premium glassmorphism & soft gradient shadows */
+    .card-premium {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(241, 245, 249, 0.9);
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.04), 0 1px 3px -1px rgba(0, 0, 0, 0.02);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .card-premium:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 20px 35px -15px rgba(124, 58, 237, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.01);
+    }
+    /* Simple smooth transitions for the modal */
+    .modal-backdrop {
+      transition: opacity 0.25s ease-out;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-slate-50/50 text-slate-800 antialiased selection:bg-purple-500 selection:text-white">
+
+  <!-- Floating Gradient Accents for Visual Depth -->
+  <div class="absolute top-0 right-1/4 -z-10 h-96 w-96 rounded-full bg-gradient-to-tr from-indigo-300/20 to-purple-300/20 blur-3xl"></div>
+  <div class="absolute top-1/3 left-10 -z-10 h-72 w-72 rounded-full bg-gradient-to-tr from-pink-300/10 to-violet-300/10 blur-3xl"></div>
+
+  <!-- Header Section -->
+  <header class="sticky top-0 z-50 border-b border-slate-100 bg-white/85 backdrop-blur-md">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+      <!-- Logo -->
+      <a href="home.html" class="flex items-center gap-3 group">
+        <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 text-white shadow-lg shadow-purple-500/20 group-hover:scale-105 transition-transform duration-300">
+          <i class="fa-solid fa-feather-pointed text-lg"></i>
+        </div>
+        <div>
+          <p class="text-xl font-extrabold tracking-tight bg-gradient-to-r from-slate-900 to-indigo-950 bg-clip-text text-transparent">BlogSphere</p>
+          <p class="text-[10px] font-bold uppercase tracking-wider text-purple-600">Creator Hub</p>
+        </div>
+      </a>
+
+      <!-- Navigation -->
+      <nav class="hidden items-center gap-1 md:flex">
+        <a href="home.html" class="rounded-xl bg-purple-50 px-4 py-2 text-sm font-semibold text-purple-700 transition-colors">Home</a>
+        <a href="explore.html" class="rounded-xl px-4 py-2 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-950 transition-colors">Explore</a>
+        <a href="write.html" class="rounded-xl px-4 py-2 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-950 transition-colors">Write</a>
+        <a href="profile.html" class="rounded-xl px-4 py-2 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-950 transition-colors">Profile</a>
+      </nav>
+
+      <!-- Actions -->
+      <div class="flex items-center gap-2.5">
+        <button class="rounded-xl border border-slate-200/80 p-2.5 text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors" aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
+        <button class="relative rounded-xl border border-slate-200/80 p-2.5 text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors" aria-label="Notifications">
+          <i class="fa-solid fa-bell"></i>
+          <span class="absolute top-2 right-2 h-2.5 w-2.5 rounded-full bg-pink-500 ring-2 ring-white"></span>
+        </button>
+        <!-- NEW: Settings Trigger Button -->
+        <button onclick="toggleSettingsModal(true)" class="rounded-xl border border-purple-200/80 bg-purple-50/50 p-2.5 text-purple-600 hover:bg-purple-100/80 transition-colors" aria-label="Platform Rules & Settings">
+          <i class="fa-solid fa-sliders"></i>
+        </button>
+        <a href="register.html" class="ml-1 rounded-xl bg-gradient-to-r from-slate-900 to-indigo-950 px-4.5 py-2.5 text-sm font-semibold text-white shadow-md shadow-slate-950/10 hover:brightness-110 transition-all" onclick="localStorage.removeItem('blog-logged-in')">Logout</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Dashboard -->
+  <main class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    
+    <!-- Hero / Welcome & Stats Section -->
+    <section class="grid gap-6 lg:grid-cols-[1.25fr_0.75fr]">
+      <!-- Left Hero Banner -->
+      <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-indigo-950 via-slate-900 to-purple-950 p-8 md:p-10 text-white shadow-xl shadow-indigo-950/10">
+        <div class="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-pink-500/20 blur-2xl"></div>
+        <div class="absolute -left-10 -bottom-10 h-40 w-40 rounded-full bg-indigo-500/20 blur-2xl"></div>
+
+        <div class="relative z-10">
+          <div class="inline-flex items-center gap-2 rounded-full bg-white/10 px-3.5 py-1.5 text-xs font-semibold text-pink-300 backdrop-blur-md ring-1 ring-white/10">
+            <i class="fa-solid fa-sparkles text-amber-300"></i> Creator Safety Rules Active
+          </div>
+          <h1 class="mt-6 text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-4xl leading-tight">
+            Welcome back, yalina holkar.<br/>Your audience is <span class="bg-gradient-to-r from-indigo-400 via-pink-400 to-amber-300 bg-clip-text text-transparent">skyrocketing.</span>
+          </h1>
+          <p class="mt-3 max-w-xl text-sm leading-relaxed text-slate-300/90">
+            Publish with confidence, safeguard your digital media workflows, and explore the most exciting emerging content trends in one collaborative workspace.
+          </p>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a href="write.html" class="group flex items-center gap-2 rounded-2xl bg-gradient-to-r from-indigo-500 to-purple-600 px-5 py-3.5 text-sm font-semibold text-white shadow-lg shadow-indigo-500/25 hover:brightness-110 transition-all">
+              <i class="fa-solid fa-pen-nib text-indigo-200 group-hover:rotate-12 transition-transform"></i> Start a new blog
+            </a>
+            <a href="explore.html" class="rounded-2xl bg-white/5 border border-white/10 px-5 py-3.5 text-sm font-semibold text-slate-200 backdrop-blur hover:bg-white/10 hover:text-white transition-all">
+              Explore content
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Stat Panel -->
+      <div class="card-premium rounded-3xl p-6 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between">
+            <h2 class="text-lg font-bold tracking-tight text-slate-900">Performance Index</h2>
+            <span class="inline-flex items-center gap-1 rounded-full bg-emerald-100/80 px-2.5 py-1 text-xs font-bold text-emerald-700">
+              <i class="fa-solid fa-arrow-trend-up"></i> +18% this month
+            </span>
+          </div>
+          <p class="text-xs text-slate-500 mt-1">Real-time statistics of your active creations.</p>
+        </div>
+
+        <div class="mt-6 grid gap-4">
+          <div class="group flex items-center justify-between rounded-2xl bg-gradient-to-br from-slate-50 to-indigo-50/30 border border-slate-100 p-4 transition-colors hover:bg-indigo-50/50">
+            <div class="flex items-center gap-3">
+              <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-indigo-500/10 text-indigo-600">
+                <i class="fa-solid fa-file-signature text-lg"></i>
+              </div>
+              <div>
+                <p class="text-xs font-semibold text-slate-500 uppercase tracking-wide">Published stories</p>
+                <p class="text-2xl font-black text-slate-900 mt-0.5">12</p>
+              </div>
+            </div>
+            <i class="fa-solid fa-chevron-right text-slate-300 opacity-0 group-hover:opacity-100 transition-opacity"></i>
+          </div>
+
+          <div class="group flex items-center justify-between rounded-2xl bg-gradient-to-br from-slate-50 to-pink-50/30 border border-slate-100 p-4 transition-colors hover:bg-pink-50/50">
+            <div class="flex items-center gap-3">
+              <div class="flex h-11 w-11 items-center justify-center rounded-xl bg-pink-500/10 text-pink-600">
+                <i class="fa-solid fa-shield-halved text-lg"></i>
+              </div>
+              <div>
+                <p class="text-xs font-semibold text-slate-500 uppercase tracking-wide">Protected uploads</p>
+                <p class="text-2xl font-black text-slate-900 mt-0.5">48</p>
+              </div>
+            </div>
+            <i class="fa-solid fa-chevron-right text-slate-300 opacity-0 group-hover:opacity-100 transition-opacity"></i>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Safety Sandbox Block (Protects Against Impersonation & Spammers) -->
+    <section class="mt-8 grid gap-6 lg:grid-cols-[1.25fr_0.75fr]">
+      <!-- Sandbox Media & Text Policy Tester -->
+      <div class="card-premium rounded-3xl p-6 relative overflow-hidden">
+        <div class="absolute top-0 right-0 h-32 w-32 bg-purple-500/5 rounded-full blur-xl"></div>
+        <div>
+          <span class="rounded-full bg-purple-100 px-3 py-1 text-xs font-extrabold text-purple-700 uppercase tracking-wider">Gatekeeper Engine</span>
+          <h2 class="text-xl font-extrabold tracking-tight text-slate-900 mt-2.5">Upload Guard & Spam Tester</h2>
+          <p class="text-xs text-slate-500 mt-1">Our artificial neural filter flags duplicate copyrighted photos and malicious spam texts instantly.</p>
+        </div>
+
+        <div class="mt-6 grid gap-5 sm:grid-cols-2">
+          <!-- Left sub-box: Media protection simulation -->
+          <div class="rounded-2xl border border-dashed border-slate-200 bg-slate-50/50 p-5 flex flex-col justify-between">
+            <div>
+              <p class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Upload Profile / Cover Photo</p>
+              <p class="text-[11px] text-slate-400">Strict reverse-lookup verifies ownership. Stock photos or pictures belonging to other users are rejected.</p>
+            </div>
+            <div class="mt-4">
+              <!-- Upload Input Area -->
+              <label for="sandbox-image-upload" class="flex flex-col items-center justify-center w-full h-32 border-2 border-slate-200 border-dashed rounded-xl cursor-pointer bg-white hover:bg-slate-50 hover:border-purple-300 transition-colors">
+                <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                  <i class="fa-solid fa-cloud-arrow-up text-slate-400 text-xl mb-1.5"></i>
+                  <p class="text-[11px] font-semibold text-slate-600">Select simulated picture</p>
+                  <p class="text-[9px] text-slate-400 mt-0.5">JPEG or PNG file</p>
+                </div>
+                <input id="sandbox-image-upload" type="file" accept="image/*" class="hidden" onchange="testImageUpload(this)">
+              </label>
+            </div>
+          </div>
+
+          <!-- Right sub-box: Spam protection simulation -->
+          <div class="rounded-2xl border border-slate-100 bg-white p-5 flex flex-col justify-between shadow-sm">
+            <div>
+              <p class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Spam & Pattern Analyzer</p>
+              <p class="text-[11px] text-slate-400">Repeated phrases, link-bombing, or typical phishing keywords are analyzed prior to database indexing.</p>
+            </div>
+            <div class="mt-4 space-y-2">
+              <textarea id="spam-test-area" rows="3" class="w-full text-xs p-3 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-slate-50" placeholder="Type or paste post text to check spam filters..."></textarea>
+              <button onclick="testSpamFilter()" class="w-full rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-2.5 transition-colors">Analyze Content Integrity</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Log/Feedback Console -->
+      <div class="card-premium rounded-3xl p-6 flex flex-col justify-between border-l-4 border-l-purple-500">
+        <div>
+          <h2 class="text-base font-extrabold tracking-tight text-slate-900">Security Core Status</h2>
+          <p class="text-xs text-slate-500 mt-1">Real-time local event auditing for your creator workspace.</p>
+        </div>
+
+        <!-- Terminal-like Console Feed -->
+        <div class="my-4 bg-slate-950 rounded-2xl p-4 font-mono text-[11px] text-slate-300 min-h-[160px] flex flex-col justify-between shadow-inner">
+          <div id="console-logs" class="space-y-2 max-h-[130px] overflow-y-auto">
+            <div class="text-slate-500">[SYSTEM] Gatekeeper initialized successfully.</div>
+            <div class="text-emerald-400">[READY] Spam analysis signatures synced.</div>
+            <div class="text-emerald-400">[READY] Visual hashing algorithms online.</div>
+          </div>
+          <div class="border-t border-slate-800/80 pt-2 text-[10px] text-purple-400 flex items-center justify-between">
+            <span>Filter Version: v4.8.1-Shield</span>
+            <span class="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          </div>
+        </div>
+
+        <button onclick="clearConsoleLogs()" class="text-xs font-bold text-slate-400 hover:text-slate-600 transition-colors self-start">
+          <i class="fa-solid fa-trash-can mr-1"></i> Clear security audit logs
+        </button>
+      </div>
+    </section>
+
+    <!-- Secondary Feed / Explore & Authors -->
+    <section class="mt-8 grid gap-6 lg:grid-cols-[1.25fr_0.75fr]">
+      <!-- Left Column: Trending Blogs -->
+      <div class="card-premium rounded-3xl p-6">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-lg font-bold tracking-tight text-slate-900">Trending blogs</h2>
+            <p class="text-xs text-slate-500 mt-0.5">The absolute most-read updates this hour.</p>
+          </div>
+          <a href="explore.html" class="text-xs font-bold uppercase tracking-wider text-indigo-600 hover:text-indigo-800 transition-colors">
+            View all <i class="fa-solid fa-arrow-right ml-0.5"></i>
+          </a>
+        </div>
+
+        <div class="mt-6 space-y-4">
+          <!-- Article Card 1 -->
+          <article class="group relative rounded-2xl border border-slate-100 bg-white p-5 hover:shadow-lg hover:shadow-purple-500/5 hover:border-purple-200/50 transition-all duration-300">
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="rounded-full bg-indigo-50 px-2.5 py-1 text-xs font-bold text-indigo-600">AI & Tech</span>
+                  <span class="text-xs text-slate-400">• 4 min read</span>
+                </div>
+                <h3 class="mt-2.5 text-base font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">
+                  <a href="#">Designing with empathy in AI products</a>
+                </h3>
+                <p class="mt-2 text-sm text-slate-500 leading-relaxed">
+                  A thoughtful breakdown of building human-centered interfaces for modern, scaling product development teams.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Article Card 2 -->
+          <article class="group relative rounded-2xl border border-slate-100 bg-white p-5 hover:shadow-lg hover:shadow-purple-500/5 hover:border-purple-200/50 transition-all duration-300">
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="rounded-full bg-pink-50 px-2.5 py-1 text-xs font-bold text-pink-600">Media</span>
+                  <span class="text-xs text-slate-400">• 7 min read</span>
+                </div>
+                <h3 class="mt-2.5 text-base font-bold text-slate-900 group-hover:text-pink-600 transition-colors">
+                  <a href="#">The rise of creator-safe media workflows</a>
+                </h3>
+                <p class="mt-2 text-sm text-slate-500 leading-relaxed">
+                  How secure upload guards and machine-learning copyright checks are shaping modern web publishing.
+                </p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- Right Column: Recommended Authors -->
+      <div class="card-premium rounded-3xl p-6">
+        <div>
+          <h2 class="text-lg font-bold tracking-tight text-slate-900">Recommended authors</h2>
+          <p class="text-xs text-slate-500 mt-0.5">Connect with trending thinkers globally.</p>
+        </div>
+
+        <div class="mt-6 space-y-3.5">
+          <!-- Author Profile 1 -->
+          <div class="flex items-center justify-between rounded-2xl border border-slate-100 bg-white/50 p-3.5 hover:bg-white transition-colors">
+            <div class="flex items-center gap-3">
+              <div class="relative">
+                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&h=100&q=80" class="h-11 w-11 rounded-full object-cover ring-2 ring-indigo-100" alt="Lina Brooks">
+                <span class="absolute bottom-0 right-0 h-3 w-3 rounded-full bg-emerald-500 ring-2 ring-white"></span>
+              </div>
+              <div>
+                <p class="text-sm font-bold text-slate-900">Lina Brooks</p>
+                <p class="text-xs font-medium text-slate-400">@linab</p>
+              </div>
+            </div>
+            <button class="rounded-xl bg-slate-100 hover:bg-indigo-600 hover:text-white px-4 py-2 text-xs font-bold text-slate-700 shadow-sm transition-all">Follow</button>
+          </div>
+
+          <!-- Author Profile 2 -->
+          <div class="flex items-center justify-between rounded-2xl border border-slate-100 bg-white/50 p-3.5 hover:bg-white transition-colors">
+            <div class="flex items-center gap-3">
+              <div class="relative">
+                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&h=100&q=80" class="h-11 w-11 rounded-full object-cover ring-2 ring-pink-100" alt="Ethan Cole">
+                <span class="absolute bottom-0 right-0 h-3 w-3 rounded-full bg-emerald-500 ring-2 ring-white"></span>
+              </div>
+              <div>
+                <p class="text-sm font-bold text-slate-900">Ethan Cole</p>
+                <p class="text-xs font-medium text-slate-400">@ethanc</p>
+              </div>
+            </div>
+            <button class="rounded-xl bg-slate-100 hover:bg-pink-500 hover:text-white px-4 py-2 text-xs font-bold text-slate-700 shadow-sm transition-all">Follow</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- POPUP: Platform Settings & Content Restriction Rules -->
+  <div id="settings-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm">
+    <div class="w-full max-w-lg rounded-3xl bg-white p-6 md:p-8 shadow-2xl border border-slate-100 transform scale-95 transition-transform duration-300">
+      
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between pb-4 border-b border-slate-100">
+        <div class="flex items-center gap-3 text-purple-600">
+          <i class="fa-solid fa-user-shield text-xl"></i>
+          <div>
+            <h3 class="text-lg font-bold text-slate-900 leading-tight">Security & Moderation Rules</h3>
+            <p class="text-xs text-slate-500">Enable advanced anti-abuse features</p>
+          </div>
+        </div>
+        <button onclick="toggleSettingsModal(false)" class="rounded-xl p-2 hover:bg-slate-100 text-slate-400 hover:text-slate-600 transition-colors">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <!-- Options Form / Feature Checkboxes -->
+      <div class="mt-6 space-y-4">
+        <!-- Restriction Option 1: Spam Protection -->
+        <div class="flex items-start gap-4 p-4 rounded-2xl bg-slate-50/50 border border-slate-100">
+          <div class="flex h-5 items-center">
+            <input id="setting-anti-spam" type="checkbox" checked class="h-4.5 w-4.5 rounded border-slate-300 text-purple-600 focus:ring-purple-500">
+          </div>
+          <div>
+            <label for="setting-anti-spam" class="text-sm font-bold text-slate-900 flex items-center gap-2">
+              Spam Prevention Engine <span class="bg-indigo-100 text-indigo-700 text-[10px] font-extrabold px-1.5 py-0.5 rounded">Highly Active</span>
+            </label>
+            <p class="text-xs text-slate-500 mt-1">Locks posting immediately if identical copy is posted within 60s, or when key terms matching advertisement fraud are detected.</p>
+          </div>
+        </div>
+
+        <!-- Restriction Option 2: Image Ownership Check -->
+        <div class="flex items-start gap-4 p-4 rounded-2xl bg-slate-50/50 border border-slate-100">
+          <div class="flex h-5 items-center">
+            <input id="setting-impersonation-shield" type="checkbox" checked class="h-4.5 w-4.5 rounded border-slate-300 text-purple-600 focus:ring-purple-500">
+          </div>
+          <div>
+            <label for="setting-impersonation-shield" class="text-sm font-bold text-slate-900 flex items-center gap-2">
+              Identity Ownership Protection <span class="bg-pink-100 text-pink-700 text-[10px] font-extrabold px-1.5 py-0.5 rounded">Core Filter</span>
+            </label>
+            <p class="text-xs text-slate-500 mt-1">Locks profile and image updates to reject reverse-matched copyrighted pictures, existing profile pictures, or cataloged assets to protect other creators.</p>
+          </div>
+        </div>
+
+        <!-- Restriction Option 3: CAPTCHA / Rate Limit -->
+        <div class="flex items-start gap-4 p-4 rounded-2xl bg-slate-50/50 border border-slate-100">
+          <div class="flex h-5 items-center">
+            <input id="setting-rate-limit" type="checkbox" class="h-4.5 w-4.5 rounded border-slate-300 text-purple-600 focus:ring-purple-500">
+          </div>
+          <div>
+            <label for="setting-rate-limit" class="text-sm font-bold text-slate-900">Enable Global Rate-Limiter</label>
+            <p class="text-xs text-slate-500 mt-1">Restrict accounts to a max of 2 posts per hour to maintain community standard quality levels.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Actions -->
+      <div class="mt-8 pt-4 border-t border-slate-100 flex items-center justify-end gap-3">
+        <button onclick="toggleSettingsModal(false)" class="rounded-xl px-4 py-2 text-xs font-bold text-slate-500 hover:bg-slate-50 hover:text-slate-700 transition-all">Cancel</button>
+        <button onclick="saveSettings()" class="rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 text-white px-5 py-2.5 text-xs font-extrabold hover:brightness-110 shadow-lg shadow-indigo-500/20 transition-all">Save Active Settings</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+  <script>
+    // Toggle Settings Rules Modal Visibility
+    function toggleSettingsModal(show) {
+      const modal = document.getElementById('settings-modal');
+      if (show) {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      } else {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }
+    }
+
+    // Modal Preferences Save Logic
+    function saveSettings() {
+      const isSpamActive = document.getElementById('setting-anti-spam').checked;
+      const isImpersonationActive = document.getElementById('setting-impersonation-shield').checked;
+      const isRateLimitActive = document.getElementById('setting-rate-limit').checked;
+
+      logToConsole(`[SETTINGS] Saved Preferences: Spam-Blocker=${isSpamActive}, Photo-Shield=${isImpersonationActive}, Rate-Limiter=${isRateLimitActive}.`, 'indigo-400');
+      toggleSettingsModal(false);
+    }
+
+    // Simple console log append utility
+    function logToConsole(message, colorClass = 'slate-300') {
+      const consoleContainer = document.getElementById('console-logs');
+      const timestamp = new Date().toLocaleTimeString();
+      const newLog = document.createElement('div');
+      newLog.className = `text-${colorClass}`;
+      newLog.innerHTML = `[${timestamp}] ${message}`;
+      consoleContainer.appendChild(newLog);
+      consoleContainer.scrollTop = consoleContainer.scrollHeight;
+    }
+
+    // Clear local audit logs
+    function clearConsoleLogs() {
+      const consoleContainer = document.getElementById('console-logs');
+      consoleContainer.innerHTML = '<div class="text-slate-500">[SYSTEM] Session log cleared. Ready.</div>';
+    }
+
+    // Anti-Spam Sandbox Tester
+    function testSpamFilter() {
+      const text = document.getElementById('spam-test-area').value.trim();
+      const isSpamActive = document.getElementById('setting-anti-spam').checked;
+
+      if (!text) {
+        logToConsole('[WARNING] Output ignored. The test text field is completely blank.', 'amber-400');
+        return;
+      }
+
+      if (!isSpamActive) {
+        logToConsole('[ALERT] Text passed validation bypass. (Spam Prevention Engine is Currently Inactive!)', 'rose-400');
+        return;
+      }
+
+      // Check common marketing trigger lists or repeated character spans
+      const spamKeywords = ["buy cheap", "crypto", "free money", "earn extra cash", "viagra", "click here to win", "casino"];
+      const containsSpamWords = spamKeywords.some(keyword => text.toLowerCase().includes(keyword));
+      const looksLikeSpamSpam = text.length > 30 && /(.)\1{4,}/.test(text); // Checks for spammed letters like "aaaaa"
+
+      if (containsSpamWords || looksLikeSpamSpam) {
+        logToConsole('[BLOCKED] SPAM DETECTED! Text signature matched automated advertising or pattern abuses.', 'rose-500');
+        alert('Blocked by Gatekeeper! This content triggers our automatic anti-spam filters.');
+      } else {
+        logToConsole(`[PASSED] Content cleared security audit. Integrity Rating: 99%.`, 'emerald-400');
+      }
+    }
+
+    // Photo Verification Sandbox Tester (Restricts uploading someone else's pictures)
+    function testImageUpload(input) {
+      const file = input.files[0];
+      const isShieldActive = document.getElementById('setting-impersonation-shield').checked;
+
+      if (!file) return;
+
+      logToConsole(`[SYSTEM] Analyzing "${file.name}"... Initiating Visual Hash Reverse Lookup...`, 'slate-300');
+
+      setTimeout(() => {
+        if (!isShieldActive) {
+          logToConsole(`[PASSED] File "${file.name}" uploaded successfully. Verification Shield was disabled.`, 'amber-400');
+          return;
+        }
+
+        // Simulating matching known copyrighted/impersonated assets
+        // For standard demo purposes, we reject generic stock titles or common copyrighted names
+        const rejectedPatterns = ["actor", "celeb", "model", "stock", "impersonate", "copy", "license", "shutterstock", "getty"];
+        const matchedCopyrightPattern = rejectedPatterns.some(pat => file.name.toLowerCase().includes(pat));
+
+        // Random mock logic for any file to represent dynamic reverse-image matching
+        if (matchedCopyrightPattern || file.size % 2 === 0) {
+          logToConsole(`[ABORTED] REJECTED: Content mismatch. Matches known copyrighted asset registries or other registered profile avatars!`, 'rose-500');
+          alert('Upload Blocked! Our identity engine identified that this photo has matching copyright or belongs to another user. Please use only your personal original creations.');
+          input.value = ""; // Reset input
+        } else {
+          logToConsole(`[PASSED] Verification complete. File "${file.name}" was confirmed to have custom visual metadata. Upload success!`, 'emerald-400');
+        }
+      }, 1200);
+    }
+  </script>
+</body>
+</html>
