@@ -136,9 +136,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (loginError) { loginError.textContent = 'Please enter your password.'; loginError.style.display = 'block'; }
         return;
       }
-      // mock authentication success: persist and redirect to platform (index)
+      // mock authentication success: persist and redirect to the dashboard
       localStorage.setItem('blog-logged-in', 'true');
-      window.location.href = 'index.html';
+      window.location.href = 'home.html';
     });
   }
 
@@ -185,7 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (window.location.pathname.endsWith('login.html') || document.body.classList.contains('login-page')) {
     if (localStorage.getItem('blog-logged-in') === 'true') {
-      window.location.href = 'index.html';
+      window.location.href = 'home.html';
     }
   }
 });
@@ -319,7 +319,7 @@ if (_loginForm_login) {
     alertBox.classList.add('hidden');
     alertBox.classList.remove('flex');
     localStorage.setItem('blog-logged-in', 'true');
-    window.location.href = 'index.html';
+    window.location.href = 'home.html';
   });
 }
 
@@ -497,21 +497,25 @@ function navigateTo(pageId) {
 const themeToggleBtn = document.getElementById('theme-toggle');
 const themeIcon = document.getElementById('theme-icon');
 
-themeToggleBtn.addEventListener('click', () => {
-  const isDark = document.documentElement.classList.toggle('dark');
-  if (isDark) {
-    themeIcon.className = "fa-solid fa-sun text-lg";
-    localStorage.setItem('theme', 'dark');
-  } else {
-    themeIcon.className = "fa-solid fa-moon text-lg";
-    localStorage.setItem('theme', 'light');
-  }
-});
+if (themeToggleBtn && themeIcon) {
+  themeToggleBtn.addEventListener('click', () => {
+    const isDark = document.documentElement.classList.toggle('dark');
+    if (isDark) {
+      themeIcon.className = "fa-solid fa-sun text-lg";
+      localStorage.setItem('theme', 'dark');
+    } else {
+      themeIcon.className = "fa-solid fa-moon text-lg";
+      localStorage.setItem('theme', 'light');
+    }
+  });
+}
 
 // Initialize Theme based on saved states
 if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
   document.documentElement.classList.add('dark');
-  themeIcon.className = "fa-solid fa-sun text-lg";
+  if (themeIcon) {
+    themeIcon.className = "fa-solid fa-sun text-lg";
+  }
 }
 
 // 🖼️ Client-Side Image Handling & Watermark Simulation
@@ -519,10 +523,11 @@ const coverImageInput = document.getElementById('cover-image-input');
 const imagePreviewContainer = document.getElementById('image-preview-container');
 const imagePreview = document.getElementById('image-preview');
 
-coverImageInput.addEventListener('change', (e) => {
-  const file = e.target.files[0];
-  if (file) {
-    // 1. Validation Check (Format & Size < 3MB)
+if (coverImageInput) {
+  coverImageInput.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
     if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) {
       alert("Invalid image format! Please use JPG, PNG or WebP.");
       return;
@@ -534,7 +539,6 @@ coverImageInput.addEventListener('change', (e) => {
 
     const reader = new FileReader();
     reader.onload = function(event) {
-      // Simulate watermarking onto a virtual Canvas (Client-side protection proof)
       const img = new Image();
       img.src = event.target.result;
       img.onload = function() {
@@ -542,73 +546,78 @@ coverImageInput.addEventListener('change', (e) => {
         const ctx = canvas.getContext('2d');
         canvas.width = img.width;
         canvas.height = img.height;
-        
+
         ctx.drawImage(img, 0, 0);
-        
-        // Dynamic styling for visual watermark
+
         ctx.font = `${Math.max(20, Math.floor(canvas.width / 40))}px Courier New`;
         ctx.fillStyle = "rgba(255, 255, 255, 0.75)";
         ctx.shadowColor = "rgba(0,0,0,0.5)";
         ctx.shadowBlur = 4;
-        
+
         const watermarkText = "© BLOGSPHERE (SARAH JENKINS)";
         const xPos = canvas.width - ctx.measureText(watermarkText).width - 30;
         const yPos = canvas.height - 30;
-        
+
         ctx.fillText(watermarkText, xPos, yPos);
-        
-        // Save the watermarked image output
+
         selectedImageBase64 = canvas.toDataURL('image/jpeg');
-        imagePreview.src = selectedImageBase64;
-        imagePreviewContainer.classList.remove('hidden');
+        if (imagePreview) {
+          imagePreview.src = selectedImageBase64;
+        }
+        if (imagePreviewContainer) {
+          imagePreviewContainer.classList.remove('hidden');
+        }
       };
     };
     reader.readAsDataURL(file);
-  }
-});
+  });
+}
 
 // ✍️ Blog Form Submit (Simulates dynamic server storage additions)
 const writeBlogForm = document.getElementById('write-blog-form');
-writeBlogForm.addEventListener('submit', (e) => {
-  e.preventDefault();
+if (writeBlogForm) {
+  writeBlogForm.addEventListener('submit', (e) => {
+    e.preventDefault();
 
-  const title = document.getElementById('blog-title').value;
-  const category = document.getElementById('blog-category').value;
-  const tagsText = document.getElementById('blog-tags').value;
-  const content = document.getElementById('blog-content').value;
-  const copyrightConfirmed = document.getElementById('copyright-agreement').checked;
+    const title = document.getElementById('blog-title')?.value || 'Untitled Story';
+    const category = document.getElementById('blog-category')?.value || 'Uncategorized';
+    const tagsText = document.getElementById('blog-tags')?.value || '';
+    const content = document.getElementById('blog-content')?.value || '';
+    const copyrightConfirmed = document.getElementById('copyright-agreement')?.checked || false;
 
-  // Multi-layered Gatekeeping Check
-  if (!copyrightConfirmed) {
-    alert("Blocked: You must confirm the image copyright ownership checkbox to upload your cover image.");
-    return;
-  }
+    if (!copyrightConfirmed) {
+      alert("Blocked: You must confirm the image copyright ownership checkbox to upload your cover image.");
+      return;
+    }
 
-  const tagsArray = tagsText.split(',').map(tag => tag.trim()).filter(Boolean);
-  const defaultFallbackImage = "https://images.unsplash.com/photo-1546074177-ffedd79d494d?auto=format&fit=crop&w=600&q=80";
+    const tagsArray = tagsText.split(',').map(tag => tag.trim()).filter(Boolean);
+    const defaultFallbackImage = "https://images.unsplash.com/photo-1546074177-ffedd79d494d?auto=format&fit=crop&w=600&q=80";
 
-  const newBlog = {
-    id: Date.now(),
-    title,
-    category,
-    author: "Sarah Jenkins",
-    authorHandle: "@sarah_codes",
-    date: "Just Now",
-    readingTime: `${Math.ceil(content.split(' ').length / 200)} min read`,
-    tags: tagsArray,
-    coverImage: selectedImageBase64 || defaultFallbackImage,
-    content,
-    likes: 0,
-    hasLiked: false
-  };
+    const newBlog = {
+      id: Date.now(),
+      title,
+      category,
+      author: "Sarah Jenkins",
+      authorHandle: "@sarah_codes",
+      date: "Just Now",
+      readingTime: `${Math.ceil(content.split(' ').length / 200)} min read`,
+      tags: tagsArray,
+      coverImage: selectedImageBase64 || defaultFallbackImage,
+      content,
+      likes: 0,
+      hasLiked: false
+    };
 
-  blogs.unshift(newBlog); // Add to beginning of local array
-  writeBlogForm.reset();
-  imagePreviewContainer.classList.add('hidden');
-  selectedImageBase64 = null;
-  
-  navigateTo('home');
-});
+    blogs.unshift(newBlog);
+    writeBlogForm.reset();
+    if (imagePreviewContainer) {
+      imagePreviewContainer.classList.add('hidden');
+    }
+    selectedImageBase64 = null;
+
+    navigateTo('home');
+  });
+}
 
 // 📰 Dynamic Blog Feed Render
 function renderBlogs() {
